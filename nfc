@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Redirecting...</title>
+    <script>
+        // Immediate redirect without a fallback message
+        window.location.href = "interac-e-transfer://send?email=shaun@jsbg.ca";
+    </script>
+</head>
+<body>
+    <!-- A tiny bit of content for the instant before the redirect -->
+    <p>Opening your banking app...</p>
+</body>
+</html>
