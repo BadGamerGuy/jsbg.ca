@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Send an e-Transfer for the Garage Sale</title>
+    <script>
+        // The main redirect logic
+        window.onload = function() {
+            // 1. Define the Interac e-Transfer URI with your email
+            const etransferUri = "interac-e-transfer://send?email=shaun@jsbg.ca";
+
+            // 2. Try to redirect to the app immediately
+            window.location.href = etransferUri;
+
+            // 3. (Optional) Fallback message if the app doesn't open
+            setTimeout(function() {
+                document.getElementById("fallback").style.display = "block";
+            }, 800); // Show fallback after 800ms if redirect seems to fail
+        };
+    </script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+            background-color: #f4f4f4;
+        }
+        #fallback {
+            display: none; /* Hidden by default */
+            margin-top: 2rem;
+            padding: 1rem;
+            border: 1px solid #ccc;
+            background-color: #fff;
+            border-radius: 5px;
+        }
+        a {
+            color: #0366d6;
+            text-decoration: none;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Opening your banking app...</h1>
+    <p>You should be redirected momentarily to send an e-Transfer.</p>
+
+    <div id="fallback">
+        <h2>Redirect didn't work?</h2>
+        <p>No problem! Please <strong>open your mobile banking app manually</strong>, go to Interac e-Transfer, and send money to:</p>
+        <p><a href="mailto:shaun@jsbg.ca">shaun@jsbg.ca</a></p>
+        <p><small><em>Be sure to enable Auto-Deposit for this recipient.</em></small></p>
+    </div>
+</body>
+</html>
