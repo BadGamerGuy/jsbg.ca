@@ -53,14 +53,15 @@
         ✔️ Copied: <strong>shaun@jsbg.ca</strong>
     </div>
 
-    <p>Simply open your banking app to complete the transfer. The amount field will be ready for you to enter.</p>
+    <p>Simply open your banking app to complete the transfer.</p>
 
-    <a class="button" href="#" id="appButton">Open Banking App</a>
+    <!-- This link will now open the device's appropriate app store -->
+    <a class="button" href="#" id="appButton">Open Your Banking App</a>
 
     <div class="info-box">
         <h3>Next Steps:</h3>
         <ol>
-            <li>Tap <strong>"Open Banking App"</strong> above.</li>
+            <li>Tap <strong>"Open Your Banking App"</strong> above. This will take you to your app.</li>
             <li>Choose to <strong>"Send Money"</strong> or <strong>"Send an e-Transfer"</strong>.</li>
             <li>When asked for the recipient's email, just <strong>paste</strong>—it's already on your clipboard!</li>
             <li>Enter the amount and send.</li>
@@ -69,17 +70,34 @@
     </div>
 
     <script>
-        // The bulletproof part: Copy the email to the clipboard automatically.
+        // The core reliable function: Copy the email to the clipboard automatically.
         function copyToClipboard(text) {
             navigator.clipboard.writeText(text).then(function() {
                 console.log('Copying to clipboard was successful!');
-                // Show a success message to the user
                 const confirmationEl = document.getElementById('confirmationMessage');
                 confirmationEl.style.display = 'block';
             }).catch(function(err) {
                 console.error('Could not copy text: ', err);
-                // If automatic copy fails, do nothing. The user can still manually copy from the page.
             });
+        }
+
+        // Function to determine the user's device and open the correct app link
+        function openBankingApp() {
+            const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+
+            // Check if iOS
+            if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+                window.location.href = 'https://apps.apple.com/ca/app/apple-store/id336353151'; // Generic link to App Store search for "banking"
+                // For a more specific link, you could use your bank's direct App Store link.
+            }
+            // Check if Android
+            else if (/android/i.test(userAgent)) {
+                window.location.href = 'https://play.google.com/store/search?q=banking&c=apps'; // Generic link to Play Store banking apps
+            }
+            else {
+                // If desktop or other, just open a new tab to a general search
+                window.open('https://www.google.com/search?q=my+banking+app', '_blank');
+            }
         }
 
         // 1. Define the email address
@@ -90,13 +108,13 @@
             copyToClipboard(recipientEmail);
         };
 
-        // 3. Make the "Open Banking App" button try to deep link, but fail gracefully.
+        // 3. Make the button open the app store link
         const appButton = document.getElementById('appButton');
         appButton.addEventListener('click', function(event) {
-            event.preventDefault(); // Prevent the link from being a simple "#"
-            // Try to open the app. If it fails, the user just remains on the page. No harm done.
-            window.location.href = "interac-e-transfer://send?email=" + recipientEmail;
+            event.preventDefault();
+            openBankingApp(); // Call our new function
         });
+
     </script>
 
 </body>
