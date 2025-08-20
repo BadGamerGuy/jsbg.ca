@@ -45,12 +45,12 @@
     <p>Tap the button below to open this payment directly in your banking app.</p>
 
     <!-- The key is to use a link (<a>) with the href, not just JS. Users expect to click links. -->
-    <a class="button" href="interac-e-transfer://send?email=YOUR_EMAIL@JSBG.CA" id="appLink">Open in Banking App</a>
+    <a class="button" href="interac-e-transfer://send?email=shaun@jsbg.ca" id="appLink">Open in Banking App</a>
 
     <div class="manual-fallback">
         <h2>Didn't work?</h2>
         <p>No problem! Please <strong>open your mobile banking app manually</strong> and send an Interac e-Transfer to:</p>
-        <p><strong><a href="mailto:YOUR_EMAIL@JSBG.CA">YOUR_EMAIL@JSBG.CA</a></strong></p>
+        <p><strong><a href="mailto:shaun@jsbg.ca">shaun@jsbg.ca</a></strong></p>
         <p><em>Auto-deposit is enabled. No security question is needed.</em></p>
     </div>
 
