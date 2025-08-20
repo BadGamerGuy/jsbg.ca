@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Send an e-Transfer | JSBG</title>
+    <title>Tap to Pay | JSBG</title>
     <style>
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
@@ -14,7 +14,11 @@
             line-height: 1.6;
             color: #333;
         }
-        .success { color: green; }
+        .success { 
+            color: green;
+            font-weight: bold;
+            margin: 1rem 0;
+        }
         .button {
             background-color: #0366d6;
             color: white;
@@ -30,47 +34,69 @@
         .button:hover {
             background-color: #0356b6;
         }
-        .manual-fallback {
+        .info-box {
             margin-top: 2rem;
             padding: 1.5rem;
             border: 1px solid #ddd;
             border-radius: 8px;
             background-color: #f9f9f9;
+            text-align: left;
         }
     </style>
 </head>
 <body>
 
-    <h1>Send a Payment via e-Transfer</h1>
-    <p>Tap the button below to open this payment directly in your banking app.</p>
+    <h1>✅ Payment Prepared</h1>
+    <p>Your recipient's email address is now copied to your clipboard.</p>
+    
+    <div id="confirmationMessage" class="success" style="display: none;">
+        ✔️ Copied: <strong>shaun@jsbg.ca</strong>
+    </div>
 
-    <!-- The key is to use a link (<a>) with the href, not just JS. Users expect to click links. -->
-    <a class="button" href="interac-e-transfer://send?email=shaun@jsbg.ca" id="appLink">Open in Banking App</a>
+    <p>Simply open your banking app to complete the transfer. The amount field will be ready for you to enter.</p>
 
-    <div class="manual-fallback">
-        <h2>Didn't work?</h2>
-        <p>No problem! Please <strong>open your mobile banking app manually</strong> and send an Interac e-Transfer to:</p>
-        <p><strong><a href="mailto:shaun@jsbg.ca">shaun@jsbg.ca</a></strong></p>
-        <p><em>Auto-deposit is enabled. No security question is needed.</em></p>
+    <a class="button" href="#" id="appButton">Open Banking App</a>
+
+    <div class="info-box">
+        <h3>Next Steps:</h3>
+        <ol>
+            <li>Tap <strong>"Open Banking App"</strong> above.</li>
+            <li>Choose to <strong>"Send Money"</strong> or <strong>"Send an e-Transfer"</strong>.</li>
+            <li>When asked for the recipient's email, just <strong>paste</strong>—it's already on your clipboard!</li>
+            <li>Enter the amount and send.</li>
+        </ol>
+        <p><em>Auto-deposit is enabled for <strong>shaun@jsbg.ca</strong>. No security question needed.</em></p>
     </div>
 
     <script>
-        // Optional: Let's try to help the user out a little more.
-        const appLink = document.getElementById('appLink');
-
-        // Check if the page was loaded via an NFC tap (likely a phone)
-        // This is a basic check, not perfect.
-        if( /Android|iPhone|iPad|iPod/i.test(navigator.userAgent) ) {
-            // It's a mobile device. We can be a bit more aggressive.
-            console.log("Mobile device detected.");
-
-            // Try to open the app after a very short delay, but don't rely on it.
-            // The main action is still the user clicking the button.
-            setTimeout(function() {
-                window.location.href = "interac-e-transfer://send?email=YOUR_EMAIL@JSBG.CA";
-            }, 300);
+        // The bulletproof part: Copy the email to the clipboard automatically.
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(function() {
+                console.log('Copying to clipboard was successful!');
+                // Show a success message to the user
+                const confirmationEl = document.getElementById('confirmationMessage');
+                confirmationEl.style.display = 'block';
+            }).catch(function(err) {
+                console.error('Could not copy text: ', err);
+                // If automatic copy fails, do nothing. The user can still manually copy from the page.
+            });
         }
-        // If it's a desktop computer, the button will be the only option, which is fine.
+
+        // 1. Define the email address
+        const recipientEmail = 'shaun@jsbg.ca';
+
+        // 2. Execute the copy command as soon as the page loads
+        window.onload = function() {
+            copyToClipboard(recipientEmail);
+        };
+
+        // 3. Make the "Open Banking App" button try to deep link, but fail gracefully.
+        const appButton = document.getElementById('appButton');
+        appButton.addEventListener('click', function(event) {
+            event.preventDefault(); // Prevent the link from being a simple "#"
+            // Try to open the app. If it fails, the user just remains on the page. No harm done.
+            window.location.href = "interac-e-transfer://send?email=" + recipientEmail;
+        });
     </script>
 
 </body>
