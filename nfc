@@ -1,14 +1,77 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Redirecting...</title>
-    <script>
-        // Immediate redirect without a fallback message
-        window.location.href = "interac-e-transfer://send?email=shaun@jsbg.ca";
-    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Send an e-Transfer | JSBG</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            text-align: center;
+            padding: 2rem;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+            color: #333;
+        }
+        .success { color: green; }
+        .button {
+            background-color: #0366d6;
+            color: white;
+            padding: 1rem 2rem;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin: 1rem 0;
+            display: inline-block;
+            text-decoration: none;
+        }
+        .button:hover {
+            background-color: #0356b6;
+        }
+        .manual-fallback {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+        }
+    </style>
 </head>
 <body>
-    <!-- A tiny bit of content for the instant before the redirect -->
-    <p>Opening your banking app...</p>
+
+    <h1>Send a Payment via e-Transfer</h1>
+    <p>Tap the button below to open this payment directly in your banking app.</p>
+
+    <!-- The key is to use a link (<a>) with the href, not just JS. Users expect to click links. -->
+    <a class="button" href="interac-e-transfer://send?email=YOUR_EMAIL@JSBG.CA" id="appLink">Open in Banking App</a>
+
+    <div class="manual-fallback">
+        <h2>Didn't work?</h2>
+        <p>No problem! Please <strong>open your mobile banking app manually</strong> and send an Interac e-Transfer to:</p>
+        <p><strong><a href="mailto:YOUR_EMAIL@JSBG.CA">YOUR_EMAIL@JSBG.CA</a></strong></p>
+        <p><em>Auto-deposit is enabled. No security question is needed.</em></p>
+    </div>
+
+    <script>
+        // Optional: Let's try to help the user out a little more.
+        const appLink = document.getElementById('appLink');
+
+        // Check if the page was loaded via an NFC tap (likely a phone)
+        // This is a basic check, not perfect.
+        if( /Android|iPhone|iPad|iPod/i.test(navigator.userAgent) ) {
+            // It's a mobile device. We can be a bit more aggressive.
+            console.log("Mobile device detected.");
+
+            // Try to open the app after a very short delay, but don't rely on it.
+            // The main action is still the user clicking the button.
+            setTimeout(function() {
+                window.location.href = "interac-e-transfer://send?email=YOUR_EMAIL@JSBG.CA";
+            }, 300);
+        }
+        // If it's a desktop computer, the button will be the only option, which is fine.
+    </script>
+
 </body>
 </html>
