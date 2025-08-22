@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Send e-Transfer</title>
+  <style>
+    body { font-family: sans-serif; text-align: center; padding: 2rem; }
+    h1 { font-size: 1.6rem; }
+    .email {
+      display: inline-block;
+      padding: 0.8rem 1rem;
+      margin: 1rem 0;
+      border: 1px solid #ccc;
+      border-radius: 0.5rem;
+      font-size: 1.2rem;
+      background: #f9f9f9;
+    }
+    button {
+      font-size: 1rem;
+      padding: 0.6rem 1rem;
+      border-radius: 0.5rem;
+      border: none;
+      background: black;
+      color: white;
+      cursor: pointer;
+    }
+    button:active { opacity: 0.7; }
+    #msg { margin-top: 1rem; color: green; }
+  </style>
+</head>
+<body>
+  <h1>Send an Interac e-Transfer</h1>
+  <p>Tap below to copy the recipient email:</p>
+  <div class="email" id="email">shaun@jsbg.ca</div><br>
+  <button onclick="copyEmail()">Copy Email</button>
+  <p id="msg"></p>
+
+  <script>
+    function copyEmail() {
+      const email = "shaun@jsbg.ca";
+      navigator.clipboard.writeText(email).then(() => {
+        document.getElementById("msg").textContent = "Copied! Open your banking app and paste it.";
+      }).catch(() => {
+        document.getElementById("msg").textContent = "Couldn’t copy automatically — just long-press the email above.";
+      });
+    }
+  </script>
+</body>
+</html>
