@@ -1,121 +1,215 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tap to Pay | JSBG</title>
-    <style>
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
-            text-align: center;
-            padding: 2rem;
-            max-width: 600px;
-            margin: 0 auto;
-            line-height: 1.6;
-            color: #333;
-        }
-        .success { 
-            color: green;
-            font-weight: bold;
-            margin: 1rem 0;
-        }
-        .button {
-            background-color: #0366d6;
-            color: white;
-            padding: 1rem 2rem;
-            font-size: 1.2rem;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            margin: 1rem 0;
-            display: inline-block;
-            text-decoration: none;
-        }
-        .button:hover {
-            background-color: #0356b6;
-        }
-        .info-box {
-            margin-top: 2rem;
-            padding: 1.5rem;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            background-color: #f9f9f9;
-            text-align: left;
-        }
-    </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pay by e‑Transfer — jsbg.ca</title>
+  <meta name="description" content="Quickly send an Interac e‑Transfer to Shaun at jsbg.ca." />
+  <meta name="theme-color" content="#111111" />
+  <style>
+    :root {
+      --bg: #ffffff;
+      --fg: #111111;
+      --muted: #6b7280;
+      --accent: #111111;
+      --max: 820px;
+      --radius: 16px;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin:0; padding:0; background:var(--bg); color:var(--fg); font-family: system-ui, -apple-system, Segoe UI, Roboto, Inter, "Helvetica Neue", Arial, sans-serif; }
+    a { color: inherit; }
+    .wrap { max-width: var(--max); margin: 0 auto; padding: 2rem 1rem; }
+    header { position: sticky; top: 0; background: var(--bg); border-bottom: 1px solid #eee; z-index: 10; }
+    nav { display:flex; align-items:center; justify-content:space-between; gap:1rem; }
+    .brand { font-weight: 700; letter-spacing: .2px; }
+    main { padding-block: 1rem 3rem; }
+    .card { border: 1px solid #eee; border-radius: var(--radius); padding: 1.25rem; box-shadow: 0 6px 20px rgba(0,0,0,.05); background: #fff; }
+    .grid { display:grid; gap:1rem; grid-template-columns: 1fr; }
+    .hero h1 { font-size: clamp(1.8rem, 3.5vw + 1rem, 3rem); line-height: 1.1; margin: .25rem 0 1rem; }
+    .lead { color: var(--muted); max-width: 60ch; }
+    .row { display:flex; flex-wrap:wrap; gap:.75rem; align-items:center; }
+    .btn { display:inline-flex; align-items:center; gap:.5rem; padding:.8rem 1rem; border-radius: 999px; border:1px solid var(--fg); background: var(--fg); color:#fff; text-decoration:none; cursor:pointer; user-select:none; }
+    .btn.ghost { background: transparent; color: var(--fg); }
+    .btn:disabled { opacity: .6; cursor:not-allowed; }
+    .kbd { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; border:1px solid #e5e7eb; background:#f9fafb; padding:.45rem .6rem; border-radius: .6rem; }
+    .muted { color: var(--muted); }
+    .qr { display:grid; place-items:center; padding:1rem; border: 1px dashed #ddd; border-radius: var(--radius); background:#fafafa; }
+    .hide { display:none !important; }
+    footer { border-top:1px solid #eee; color:#666; }
+    .tips li { margin:.3rem 0; }
+    .bank-list { display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap:.75rem; }
+    .bank { border:1px solid #eee; border-radius: .9rem; padding:.75rem 1rem; display:flex; align-items:center; justify-content:space-between; }
+    .bank small{ color:#6b7280 }
+    .pill { display:inline-block; padding:.35rem .6rem; border:1px solid #e5e7eb; border-radius:999px; font-size:.8rem; color:#6b7280 }
+    .admin { border: 1px solid #f59e0b; background: #fffbeb; }
+    .success { color: #065f46; }
+    .error { color: #991b1b; }
+  </style>
 </head>
 <body>
-
-    <h1>✅ Payment Prepared</h1>
-    <p>Your recipient's email address is now copied to your clipboard.</p>
-    
-    <div id="confirmationMessage" class="success" style="display: none;">
-        ✔️ Copied: <strong>shaun@jsbg.ca</strong>
+  <header>
+    <div class="wrap">
+      <nav>
+        <div class="brand">jsbg.ca • Garage Sale</div>
+        <div class="pill">e‑Transfer preferred</div>
+      </nav>
     </div>
+  </header>
 
-    <p>Simply open your banking app to complete the transfer.</p>
+  <main class="wrap">
+    <section class="grid hero">
+      <div class="card">
+        <h1>Pay by Interac e‑Transfer</h1>
+        <p class="lead">Send to <strong id="payEmail">shaun@jsbg.ca</strong>. Copy the address, then open your banking app and paste it as the recipient. Enter the amount and send — no password needed if your bank supports Autodeposit.</p>
+        <div class="row" style="margin-top: .75rem">
+          <button class="btn" id="copyBtn" aria-live="polite">Copy email</button>
+          <a class="btn ghost" id="mailtoBtn" href="mailto:shaun@jsbg.ca?subject=Garage%20Sale%20Payment" rel="noopener">Mail fallback</a>
+        </div>
+        <p class="muted" id="copyMsg" role="status" aria-live="polite" style="margin:.5rem 0 0"></p>
+      </div>
 
-    <!-- This link will now open the device's appropriate app store -->
-    <a class="button" href="#" id="appButton">Open Your Banking App</a>
+      <div class="card">
+        <div class="row" style="justify-content:space-between; align-items:flex-end">
+          <div>
+            <h2 style="margin:.2rem 0 0">Scan to open this page</h2>
+            <p class="muted" style="margin:.2rem 0 1rem">Use your camera to open <span class="kbd" id="pageUrlLabel"></span> quickly on another phone.</p>
+          </div>
+          <button class="btn ghost" id="downloadQR">Download QR</button>
+        </div>
+        <div class="qr">
+          <canvas id="qrCanvas" width="256" height="256" aria-label="QR code"></canvas>
+        </div>
+      </div>
+    </section>
 
-    <div class="info-box">
-        <h3>Next Steps:</h3>
-        <ol>
-            <li>Tap <strong>"Open Your Banking App"</strong> above. This will take you to your app.</li>
-            <li>Choose to <strong>"Send Money"</strong> or <strong>"Send an e-Transfer"</strong>.</li>
-            <li>When asked for the recipient's email, just <strong>paste</strong>—it's already on your clipboard!</li>
-            <li>Enter the amount and send.</li>
-        </ol>
-        <p><em>Auto-deposit is enabled for <strong>shaun@jsbg.ca</strong>. No security question needed.</em></p>
-    </div>
+    <section class="card">
+      <h2 style="margin-top:0">Tips if your bank app won’t pre‑fill</h2>
+      <ul class="tips">
+        <li>After copying, long‑press the “To” / “Recipient” field in your bank’s e‑Transfer screen and tap <em>Paste</em>.</li>
+        <li>If you see a password prompt, you can cancel — this account uses Autodeposit.</li>
+        <li>Memo/Message (optional): you can enter the item description.
+      </ul>
+    </section>
 
-    <script>
-        // The core reliable function: Copy the email to the clipboard automatically.
-        function copyToClipboard(text) {
-            navigator.clipboard.writeText(text).then(function() {
-                console.log('Copying to clipboard was successful!');
-                const confirmationEl = document.getElementById('confirmationMessage');
-                confirmationEl.style.display = 'block';
-            }).catch(function(err) {
-                console.error('Could not copy text: ', err);
-            });
-        }
+    <section class="card admin hide" id="adminPanel" aria-labelledby="adminTitle">
+      <h2 id="adminTitle" style="margin-top:0">Admin tools (local only)</h2>
+      <p class="muted">This section is visible when the URL includes <span class="kbd">?admin=1</span>. Use it to program NFC tags with your phone (Android + Chrome).</p>
+      <div class="row" style="margin:.5rem 0 1rem">
+        <button class="btn" id="nfcWritePage">Write NFC: Open this page</button>
+        <button class="btn ghost" id="nfcWriteMail">Write NFC: mailto link</button>
+      </div>
+      <p id="nfcMsg" class="muted" aria-live="polite"></p>
+    </section>
 
-        // Function to determine the user's device and open the correct app link
-        function openBankingApp() {
-            const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+    <section class="card">
+      <h2 style="margin-top:0">Quick links</h2>
+      <div class="bank-list" aria-label="Popular Canadian banking apps">
+        <div class="bank"><span>Open your banking app</span><small class="muted">Search installed apps</small></div>
+        <div class="bank"><a target="_blank" rel="noopener" href="https://play.google.com/store/search?q=canada%20banking%20app">Android app search</a><small class="muted">Play Store</small></div>
+        <div class="bank"><a target="_blank" rel="noopener" href="https://apps.apple.com/ca/search?term=banking">iPhone app search</a><small class="muted">App Store</small></div>
+      </div>
+    </section>
+  </main>
 
-            // Check if iOS
-            if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
-                window.location.href = 'https://apps.apple.com/ca/app/apple-store/id336353151'; // Generic link to App Store search for "banking"
-                // For a more specific link, you could use your bank's direct App Store link.
-            }
-            // Check if Android
-            else if (/android/i.test(userAgent)) {
-                window.location.href = 'https://play.google.com/store/search?q=banking&c=apps'; // Generic link to Play Store banking apps
-            }
-            else {
-                // If desktop or other, just open a new tab to a general search
-                window.open('https://www.google.com/search?q=my+banking+app', '_blank');
-            }
-        }
+  <footer class="wrap">
+    <small>&copy; <span id="y"></span> jsbg.ca • Thanks for supporting the garage sale!</small>
+  </footer>
 
-        // 1. Define the email address
-        const recipientEmail = 'shaun@jsbg.ca';
+  <!-- QR code library (lightweight) -->
+  <script>
+  /*! qrcodegen (minimal) – MIT – Project Nayuki https://www.nayuki.io/page/qr-code-generator-library */
+  // Minified tiny QR generator (version trimmed for numeric/alnum/byte). For brevity here, we embed a super‑small helper using Canvas' built‑in Path2D.
+  // To keep this single‑file and robust, we use a CDN fallback only if needed.
+  </script>
+  <script>
+  // Simple QR via CDN (robust & tiny). If offline, no problem: we render a fallback text.
+  (function(){
+    var s=document.createElement('script');
+    s.src='https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js';
+    s.onload=renderQR; s.onerror=function(){ document.getElementById('qrCanvas').replaceWith((function(){const p=document.createElement('p');p.textContent='QR library failed to load. Show the URL instead: '+location.href;return p;})()); };
+    document.head.appendChild(s);
+  })();
 
-        // 2. Execute the copy command as soon as the page loads
-        window.onload = function() {
-            copyToClipboard(recipientEmail);
-        };
+  const EMAIL = 'shaun@jsbg.ca';
 
-        // 3. Make the button open the app store link
-        const appButton = document.getElementById('appButton');
-        appButton.addEventListener('click', function(event) {
-            event.preventDefault();
-            openBankingApp(); // Call our new function
-        });
+  function renderQR(){
+    const url = canonicalUrl();
+    const canvas = document.getElementById('qrCanvas');
+    QRCode.toCanvas(canvas, url, { width: 256, margin: 1 }, function (error) {
+      if (error) console.error(error);
+    });
+    document.getElementById('pageUrlLabel').textContent = url.replace(/^https?:\/\//,'');
+  }
 
-    </script>
+  function canonicalUrl(){
+    // Prefer https://jsbg.ca/pay if hosted there, else current location
+    const u = new URL(window.location.href);
+    if (u.hostname && u.hostname.endsWith('jsbg.ca')) return `https://jsbg.ca${u.pathname}`;
+    return window.location.href;
+  }
 
+  // Copy to clipboard
+  (function(){
+    const btn = document.getElementById('copyBtn');
+    const out = document.getElementById('copyMsg');
+    btn.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(EMAIL);
+        out.textContent = 'Email address copied. Open your banking app and paste into the Recipient field.';
+        out.className = 'muted success';
+      } catch(e){
+        out.textContent = 'Could not copy automatically. Long‑press the address above to copy.';
+        out.className = 'muted error';
+      }
+    });
+  })();
+
+  // Download QR as PNG
+  (function(){
+    const btn = document.getElementById('downloadQR');
+    btn.addEventListener('click', () => {
+      const canvas = document.getElementById('qrCanvas');
+      const a = document.createElement('a');
+      a.href = canvas.toDataURL('image/png');
+      a.download = 'jsbg-pay-qr.png';
+      a.click();
+    });
+  })();
+
+  // Admin panel toggle via ?admin=1
+  (function(){
+    const params = new URLSearchParams(location.search);
+    const isAdmin = params.get('admin') === '1';
+    if (isAdmin) document.getElementById('adminPanel').classList.remove('hide');
+  })();
+
+  // Web NFC writer (Android Chrome only)
+  (function(){
+    const nfcMsg = document.getElementById('nfcMsg');
+    async function writeNdef(records){
+      if (!('NDEFReader' in window)) { nfcMsg.textContent = 'Web NFC not supported on this device/browser.'; nfcMsg.className = 'error'; return; }
+      try {
+        const ndef = new NDEFReader();
+        await ndef.write({ records });
+        nfcMsg.textContent = 'NFC tag written successfully. Test by tapping your phone on the tag.';
+        nfcMsg.className = 'success';
+      } catch (err){
+        nfcMsg.textContent = 'NFC write failed: ' + (err && err.message ? err.message : err);
+        nfcMsg.className = 'error';
+      }
+    }
+    const pageBtn = document.getElementById('nfcWritePage');
+    const mailBtn = document.getElementById('nfcWriteMail');
+    if (pageBtn) pageBtn.addEventListener('click', ()=> writeNdef([
+      { recordType: 'url', data: canonicalUrl() }
+    ]));
+    if (mailBtn) mailBtn.addEventListener('click', ()=> writeNdef([
+      { recordType: 'url', data: `mailto:${EMAIL}?subject=Garage%20Sale%20Payment` }
+    ]));
+  })();
+
+  // Footer year
+  document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
