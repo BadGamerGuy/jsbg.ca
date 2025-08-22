@@ -1,4 +1,3 @@
-# jsbg.ca
-Redirect for eTransfers
+# Just Some Bald Guy
 
-If I put different text here will it show on my page?
+Welcome to my shell of a page. It's nothing but a bit of code on Github at the moment but maybe it'll be something more some day...
