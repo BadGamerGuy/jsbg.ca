@@ -1,9 +1,271 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta http-equiv="refresh" content="0; url=https://docs.google.com/document/d/1yootNugg8TiQ9vK6avjEUKVlRW94PJXYjBo-pqQmqaU/edit?usp=sharing">
-  </head>
-  <body>
-    <p>Redirecting to <a href="https://docs.google.com/document/d/1yootNugg8TiQ9vK6avjEUKVlRW94PJXYjBo-pqQmqaU/edit?usp=sharing">Apologies Game Rules</a>...</p>
-  </body>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Apologies – Game Rules</title>
+  <meta name="description" content="Apologies board game rules – mobile-first, readable, and easy to reference during play." />
+  <style>
+    /* --- Design tokens --- */
+    :root {
+      --bg: #0b0d12;
+      --panel: #10131a;
+      --surface: #141926;
+      --text: #e9eef5;
+      --muted: #a9b3c6;
+      --accent: #7bd0ff;
+      --accent-2: #7bffaf;
+      --border: #223046;
+      --danger: #ff7b9b;
+      --info: #7bb6ff;
+      --radius: 14px;
+      --shadow: 0 8px 30px rgba(0,0,0,.35);
+    }
+    @media (prefers-color-scheme: light) {
+      :root {
+        --bg: #f6f7fb; --panel:#ffffff; --surface:#ffffff; --text:#111827; --muted:#51607a; --border:#e5e7eb; --accent:#0ea5e9; --accent-2:#10b981;
+      }
+    }
+
+    /* --- Base --- */
+    html, body { margin:0; padding:0; background:var(--bg); color:var(--text); font:16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Arial; }
+    .wrap { width:min(960px, 92vw); margin:0 auto; }
+
+    /* --- Header --- */
+    header.site { position:sticky; top:0; z-index:10; background:var(--panel); border-bottom:1px solid var(--border); box-shadow: var(--shadow);
+      backdrop-filter: blur(6px); }
+    header .bar { display:flex; align-items:center; justify-content:space-between; padding:12px 0; }
+    h1.logo { font-size:18px; margin:0; letter-spacing: .4px; }
+    .badge { display:inline-block; padding:2px 8px; background:linear-gradient(90deg,var(--accent),var(--accent-2)); color:#051018; border-radius:999px; font-weight:700; font-size:12px; margin-left:8px; }
+
+    /* --- Layout --- */
+    main { display:grid; grid-template-columns: 1fr; gap:22px; }
+    @media (min-width: 900px) {
+      main { grid-template-columns: 240px 1fr; }
+    }
+
+    /* --- TOC --- */
+    nav.toc { position: relative; }
+    .card { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); box-shadow: var(--shadow); }
+    .toc .card { position:sticky; top:72px; }
+    .toc h2 { font-size:14px; text-transform:uppercase; letter-spacing:.12em; color:var(--muted); margin:14px 14px 8px; }
+    .toc ul { list-style:none; margin:0; padding:0 10px 12px 12px; }
+    .toc a { display:block; padding:8px 10px; border-radius:8px; color:var(--text); text-decoration:none; font-size:15px; }
+    .toc a:hover { background:rgba(123,208,255,.12); }
+
+    /* --- Article --- */
+    article { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); box-shadow: var(--shadow); padding: clamp(14px, 2.5vw, 26px); }
+    article h2 { margin:.2rem 0 .6rem; font-size: clamp(20px, 3.8vw, 28px); }
+    article h3 { margin:1.1rem 0 .4rem; font-size: clamp(17px, 3.2vw, 22px); }
+    p, li { color: var(--text); }
+    .muted { color: var(--muted); }
+    .rule { padding:.5rem .75rem; border-left:3px solid var(--accent); background: rgba(123,208,255,.08); border-radius:10px; margin:.45rem 0; }
+
+    /* --- Info grid --- */
+    .grid { display:grid; grid-template-columns: 1fr; gap:12px; }
+    @media (min-width:700px){ .grid.two { grid-template-columns: 1fr 1fr; } }
+
+    /* --- Specials --- */
+    .specials { display:grid; grid-template-columns: 1fr; gap:10px; }
+    @media (min-width:720px){ .specials { grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width:980px){ .specials { grid-template-columns: repeat(3, 1fr); } }
+    .spec { border:1px dashed var(--border); border-radius:12px; padding:12px; background:rgba(127,127,255,.03); }
+    .spec h4 { margin:.2rem 0 .4rem; }
+    .pill { display:inline-block; font-size:12px; padding:2px 8px; border:1px solid var(--border); border-radius:999px; color:var(--muted); }
+
+    /* --- Figures / image placeholders --- */
+    figure { margin: 12px 0; padding:10px; border:1px solid var(--border); border-radius:12px; background: rgba(255,255,255,.02); }
+    figure .placeholder { width:100%; aspect-ratio: 16/9; border-radius:10px; border:1px solid var(--border); background: repeating-linear-gradient(45deg, #1c2231, #1c2231 10px, #151a27 10px, #151a27 20px); display:flex; align-items:center; justify-content:center; color:var(--muted); font-size:14px; }
+    figcaption { color:var(--muted); font-size:13px; margin-top:6px; }
+
+    /* --- Callouts --- */
+    .callout { border:1px solid var(--border); border-left:4px solid var(--info); background: rgba(123,182,255,.08); padding:12px; border-radius:12px; }
+
+    /* --- Footer --- */
+    footer { color:var(--muted); text-align:center; padding:28px 0 38px; }
+
+    /* --- Links --- */
+    a { color: var(--accent); }
+
+    /* --- Helpers --- */
+    .space { height: 8px; }
+    .kbd { background:#0e1320; border:1px solid var(--border); border-radius:8px; padding:0 6px; color:var(--muted); }
+
+  </style>
+</head>
+<body>
+  <header class="site">
+    <div class="wrap bar">
+      <h1 class="logo">Apologies <span class="badge">Rules</span></h1>
+      <div class="muted" style="font-size:13px">Mobile‑first reference</div>
+    </div>
+  </header>
+
+  <div class="wrap" style="margin-top:14px; margin-bottom:14px;">
+    <main>
+      <!-- Table of contents -->
+      <nav class="toc">
+        <div class="card">
+          <h2>Contents</h2>
+          <ul>
+            <li><a href="#overview">Overview</a></li>
+            <li><a href="#gameplay">Gameplay</a></li>
+            <li><a href="#dealing">Dealing</a></li>
+            <li><a href="#priority">Rule Priority</a></li>
+            <li><a href="#core">Core Rules</a></li>
+            <li><a href="#specials">Special Cards</a></li>
+            <li><a href="#variants">Variants</a></li>
+            <li><a href="#suggestions">Suggestions</a></li>
+            <li><a href="#changelog">Change Log</a></li>
+          </ul>
+        </div>
+      </nav>
+
+      <!-- Article -->
+      <article>
+        <section id="overview">
+          <h2>Overview</h2>
+          <p class="muted">Apologies is best with <strong>4 players</strong> and these rules are written with teams in mind. With fewer players, skip the empty player sections of the board and ignore the team rules. For <strong>2 players</strong>, use a single board instead of both.</p>
+
+          <figure>
+            <div class="placeholder">Add board overview image here</div>
+            <figcaption>Example board layout with start/finish colors and direction arrows.</figcaption>
+          </figure>
+        </section>
+
+        <section id="gameplay">
+          <h2>Gameplay (Goal & Movement)</h2>
+          <div class="grid two">
+            <div>
+              <p>Start on your color’s <strong>start</strong>, go <em>with the arrows</em> around the board, and finish in your color’s <strong>finish</strong>. Only matching color pieces can enter a color’s finish. Unless a special card says otherwise, you always move <strong>forward</strong>.</p>
+              <div class="callout">
+                <strong>Win condition:</strong> Once your pieces are all in your finish, you play your <em>teammate’s</em> pieces. If both teams’ pieces are fully finished, you win.
+              </div>
+            </div>
+            <figure>
+              <div class="placeholder">Add movement example image here</div>
+              <figcaption>Movement path and finish entry example.</figcaption>
+            </figure>
+          </div>
+        </section>
+
+        <section id="dealing">
+          <h2>Dealing</h2>
+          <p>The deal proceeds <strong>clockwise</strong>. Each dealer deals the entire deck over <strong>three hands</strong>: two hands of <strong>4</strong> cards and one hand of <strong>5</strong> cards. The dealer chooses which hand is which. After three hands, the whole deck has been dealt; the next player becomes dealer and repeats the three‑hand cycle.</p>
+        </section>
+
+        <section id="priority">
+          <h2>Rule Priority</h2>
+          <p class="muted">If rules conflict, prioritize in this order. House rules are always welcome—have fun.</p>
+          <ol>
+            <li class="rule">Follow higher‑order rules first when conflicts arise.</li>
+            <li class="rule">Once in your <strong>finish</strong>, a piece <strong>cannot leave</strong> and you <strong>cannot pass</strong> pieces already in your finish.</li>
+            <li class="rule">If you can play, you must—even if it hurts your position.</li>
+            <li class="rule">Passing an opponent does nothing unless done with a <strong>King</strong> (see Special Cards).</li>
+            <li class="rule">If you can’t play, discard your entire hand face‑up (fanned) so everyone knows which cards are now unavailable.</li>
+            <li class="rule">If you discard a full hand, you may move <strong>one piece forward 1</strong> space (e.g., Start 4 → Start 3).</li>
+            <li class="rule">Once all of your pieces are in your finish, discard what remains in your hand.</li>
+            <li class="rule">Landing on another player’s piece sends that piece <strong>home</strong>.</li>
+            <li class="rule">You <strong>cannot land on your own piece</strong>. If your only legal move lands on your own piece, you’re considered unable to play and must discard.</li>
+            <li class="rule">You <strong>can</strong> land on a <strong>teammate’s</strong> piece; doing so sends them back to their start.</li>
+            <li class="rule">When sent back to start, a piece goes to the <strong>furthest available</strong> start space (e.g., if Start 3 is open, it goes there rather than Start 1).</li>
+            <li class="rule">After your finish is complete, you begin playing your <strong>teammate’s</strong> pieces.</li>
+            <li class="rule">If both your and your teammate’s pieces are all in finish, <strong>you win</strong>.</li>
+          </ol>
+
+          <div class="callout" style="margin-top:10px">
+            <strong>Optional team swap:</strong> At the start of each hand, teammates may swap one card face‑down. Recommended once you know the strategy—it speeds up the game.
+          </div>
+        </section>
+
+        <section id="core">
+          <h2>Core Rules (Quick Reference)</h2>
+          <ul>
+            <li>Start/Finish are color‑matched; follow arrows around the board.</li>
+            <li>You must play if you legally can. Otherwise, discard face‑up.</li>
+            <li>Landing on an opponent sends them home. You can’t land on yourself. You <em>can</em> land on a teammate (sends them to start).</li>
+            <li>When returning to start, go to the furthest available start position.</li>
+            <li>After you finish your pieces, play your teammate’s pieces to help them finish.</li>
+          </ul>
+        </section>
+
+        <section id="specials">
+          <h2>Special Cards</h2>
+          <p class="muted">Any card can be played as its face value (Ace=1, Jack=11, King=13) instead of its special ability. Board icons are reminders—no need to announce your hand.</p>
+
+          <div class="specials">
+            <div class="spec">
+              <h4>Ace or King <span class="pill">Leave Start</span></h4>
+              <p>Either card can move a piece out of your start from any start slot (e.g., Start 3 → track).</p>
+            </div>
+            <div class="spec">
+              <h4>4 <span class="pill">Move Backward</span></h4>
+              <p>May move backward as needed, enabling tactical retreats or set‑ups.</p>
+            </div>
+            <div class="spec">
+              <h4>7 <span class="pill">Split Movement</span></h4>
+              <p>Split the 7 across <em>any</em> of your pieces on the board in any combination (e.g., 3+2+2).</p>
+            </div>
+            <div class="spec">
+              <h4>Jack <span class="pill">Swap Pieces</span></h4>
+              <p>Swap your piece with <em>any</em> other player’s piece on the board.</p>
+            </div>
+            <div class="spec">
+              <h4>King <span class="pill">Pass & Send Home</span></h4>
+              <p>In addition to leaving start, if you pass an opposing piece while moving with a King, you may send that piece back to start.</p>
+            </div>
+          </div>
+
+          <figure>
+            <div class="placeholder">Add special card icons image here</div>
+            <figcaption>Board icon legend for quick recall during play.</figcaption>
+          </figure>
+        </section>
+
+        <section id="variants">
+          <h2>Variants (Coming Soon)</h2>
+          <ul>
+            <li>2 Players</li>
+            <li>3 Players</li>
+            <li>6 Players</li>
+          </ul>
+          <p class="muted">These will be added as optional modes. House rules are encouraged meanwhile.</p>
+        </section>
+
+        <section id="suggestions">
+          <h2>Suggestions</h2>
+          <p>Got an idea or spotted something unclear? Send feedback and we’ll iterate. Community suggestions help improve the game and the board.</p>
+          <figure>
+            <div class="placeholder">Add example setup image here</div>
+            <figcaption>Use images where players commonly get confused—setup, start/finish, or special moves.</figcaption>
+          </figure>
+        </section>
+
+        <section id="changelog">
+          <h2>Change Log</h2>
+          <ul>
+            <li><strong>V1</strong> – Finalized rules and created placeholders for variants, suggestions, and this changelog.</li>
+          </ul>
+        </section>
+      </article>
+    </main>
+  </div>
+
+  <footer>
+    <div class="wrap">
+      <small class="muted">© JSBG • Apologies game rules • Built mobile‑first</small>
+    </div>
+  </footer>
+
+  <script>
+    // Smooth scroll for anchor links (mobile friendly)
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        const href = a.getAttribute('href');
+        const el = document.querySelector(href);
+        if (el) { e.preventDefault(); el.scrollIntoView({behavior:'smooth', block:'start'}); }
+      });
+    });
+  </script>
+</body>
 </html>
