@@ -335,7 +335,98 @@
       .card { box-shadow:none; }
       a { color:#111; text-decoration:none; }
     }
-  </style>
+  .rotate-ccw { transform: rotate(-90deg); transform-origin: center; }
+/* Tap-to-zoom images */
+img.zoomable { cursor: zoom-in; }
+
+/* Fullscreen overlay */
+.zoom-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.82);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 18px;
+  z-index: 9999;
+}
+.zoom-overlay[aria-hidden="false"] { display: flex; }
+
+.zoom-sheet {
+  width: min(1100px, 96vw);
+  max-height: 92vh;
+  background: color-mix(in oklab, var(--panel) 90%, black 10%);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+.zoom-topbar {
+  display:flex;
+  align-items:center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+.zoom-title {
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.zoom-actions { display:flex; gap: 8px; }
+
+.zoom-actions button {
+  appearance: none;
+  border: 1px solid var(--border);
+  background: var(--surface-2);
+  color: var(--text);
+  border-radius: 12px;
+  padding: 10px 12px;
+  font-weight: 800;
+  cursor: pointer;
+  min-height: 40px;
+}
+
+.zoom-actions button:hover {
+  background: color-mix(in oklab, var(--surface-2) 70%, var(--accent) 10%);
+}
+
+.zoom-body {
+  max-height: calc(92vh - 58px);
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  background: rgba(0,0,0,.12);
+}
+
+.zoom-body img {
+  display:block;
+  max-width: none; /* allow natural large size */
+  width: 100%;
+  height: auto;
+}
+
+.zoom-body .inner {
+  padding: 10px;
+}
+
+.zoom-hint {
+  font-size: 12px;
+  color: var(--muted);
+  padding: 0 12px 10px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
+
+</style>
 </head>
 <body>
   <header class="site">
@@ -396,7 +487,7 @@
           </ul>
 
           <figure>
-            <img src="FullBoardSetup.jpg" alt="Full board setup showing all players and start areas" loading="lazy" style="width:100%;height:auto;border-radius:12px;border:1px solid var(--border);" />
+            <img class="zoomable" data-zoom-title="Full board setup" src="FullBoardSetup.jpg" alt="Full board setup showing all players and start areas" loading="lazy" style="width:100%;height:auto;border-radius:12px;border:1px solid var(--border);" />
             <figcaption>Full board setup — shows teams, player areas, and the general layout.</figcaption>
           </figure>
         </section>
@@ -459,7 +550,7 @@
           </ol>
 
           <figure>
-            <img src="PlayerOneStarted.jpg" alt="Close-up of a start row with numbered positions and a peg" loading="lazy" style="width:100%;height:auto;border-radius:12px;border:1px solid var(--border);" />
+            <img class="zoomable" data-zoom-title="Numbered start row" src="PlayerOneStarted.jpg" alt="Close-up of a start row with numbered positions and a peg" loading="lazy" style="width:100%;height:auto;border-radius:12px;border:1px solid var(--border);" />
             <figcaption>Numbered start row example for the “discard → move 1 space” rule.</figcaption>
           </figure>
         </section>
@@ -473,7 +564,9 @@
           <p class="muted">All cards can be played as face value instead of their special abilities below (Ace = 1, Jack = 11, King = 13). The symbols on the board are reminders so you don’t need to ask during the game and give away your hand.</p>
 
           <figure>
-            <img src="BoardSymbols.jpg" alt="Board symbols legend showing special card reminders" loading="lazy" style="width:100%;height:auto;border-radius:12px;border:1px solid var(--border);" />
+            <div style="overflow:auto;">
+              <img class="zoomable" data-zoom-title="Board symbols legend" src="BoardSymbols.jpg" alt="Board symbols legend showing special card reminders" loading="lazy" class="rotate-ccw" style="max-width:100%;height:auto;border-radius:12px;border:1px solid var(--border);" />
+            </div>
             <figcaption>Board symbol reminders for special cards.</figcaption>
           </figure>
 
@@ -524,8 +617,8 @@
           </ul>
 
           <figure>
-            <div class="placeholder">Insert image: 3‑player layout showing blocked section and markers</div>
-            <figcaption>3-player layout — show where to place the “12” and “11” pegs.</figcaption>
+            <img class="zoomable" data-zoom-title="3-player variant layout" src="3PlayerVariant.jpg" alt="3-player variant layout showing blocked section and markers" loading="lazy" style="width:100%;height:auto;border-radius:12px;border:1px solid var(--border);" />
+            <figcaption>3-player layout — blocked section marked and peg placement at 12 and 11.</figcaption>
           </figure>
 
           <h3>6 Players</h3>
@@ -539,8 +632,8 @@
           </ul>
 
           <figure>
-            <div class="placeholder">Insert image: 6‑player layout with arrows showing the "jank" movement</div>
-            <figcaption>6-player layout — add arrows so the transition points are obvious.</figcaption>
+            <img class="zoomable" data-zoom-title="6-player variant layout" src="6PlayerVariant.jpg" alt="6-player variant layout with arrows showing movement between boards" loading="lazy" style="width:100%;height:auto;border-radius:12px;border:1px solid var(--border);" />
+            <figcaption>6-player layout — arrows show how movement transitions between boards.</figcaption>
           </figure>
         </section>
 
@@ -576,6 +669,24 @@
     </div>
   </footer>
 
+  <!-- Tap-to-zoom overlay (single, reused for all images) -->
+  <div class="zoom-overlay" id="zoomOverlay" aria-hidden="true" role="dialog" aria-label="Image viewer">
+    <div class="zoom-sheet" role="document">
+      <div class="zoom-topbar">
+        <div class="zoom-title" id="zoomTitle">Image</div>
+        <div class="zoom-actions">
+          <button type="button" id="zoomCloseBtn" aria-label="Close">Close</button>
+        </div>
+      </div>
+      <div class="zoom-body" id="zoomBody">
+        <div class="inner">
+          <img id="zoomImg" alt="" />
+        </div>
+        <div class="zoom-hint">Tip: pinch to zoom on mobile. Drag/scroll to pan.</div>
+      </div>
+    </div>
+  </div>
+
   <script>
     // Smooth scroll for TOC anchors (nice on mobile)
     document.querySelectorAll('a[href^="#"]').forEach(a => {
@@ -589,8 +700,56 @@
       });
     });
 
-    // Copy current URL (handy if someone wants to share the rules)
-    // You can wire this to a button later if you want.
+    // Tap-to-zoom for images
+    const overlay = document.getElementById('zoomOverlay');
+    const zoomImg = document.getElementById('zoomImg');
+    const zoomTitle = document.getElementById('zoomTitle');
+    const closeBtn = document.getElementById('zoomCloseBtn');
+
+    function openZoom(imgEl) {
+      const src = imgEl.getAttribute('src');
+      const alt = imgEl.getAttribute('alt') || '';
+      const title = imgEl.getAttribute('data-zoom-title') || alt || 'Image';
+
+      zoomImg.src = src;
+      zoomImg.alt = alt;
+      zoomTitle.textContent = title;
+
+      overlay.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+      closeBtn.focus();
+    }
+
+    function closeZoom() {
+      overlay.setAttribute('aria-hidden', 'true');
+      zoomImg.src = '';
+      document.body.style.overflow = '';
+    }
+
+    // Open on tap/click
+    document.querySelectorAll('img.zoomable').forEach(img => {
+      img.addEventListener('click', () => openZoom(img));
+      img.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          openZoom(img);
+        }
+      });
+      // Make keyboard-focusable (nice bonus)
+      img.setAttribute('tabindex', '0');
+      img.setAttribute('role', 'button');
+      img.setAttribute('aria-label', (img.getAttribute('alt') || 'Zoom image'));
+    });
+
+    // Close interactions
+    closeBtn.addEventListener('click', closeZoom);
+    overlay.addEventListener('click', (e) => {
+      if (e.target === overlay) closeZoom();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (overlay.getAttribute('aria-hidden') === 'false' && e.key === 'Escape') closeZoom();
+    });
+
   </script>
 </body>
 </html>
