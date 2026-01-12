@@ -150,12 +150,28 @@
       background: color-mix(in oklab, var(--surface) 94%, white 2%);
     }
 
-    .stage img {
+    /* Reserve consistent space so the page doesn't jump when switching images */
+    .stage-media {
+      position: relative;
       width: 100%;
-      height: auto;
+      aspect-ratio: 16 / 9;
       border-radius: 12px;
       border: 1px solid var(--border);
-      display:block;
+      background: color-mix(in oklab, var(--surface-2) 85%, black 5%);
+      overflow: hidden;
+    }
+
+    @media (max-width: 520px) {
+      .stage-media { aspect-ratio: 4 / 3; }
+    }
+
+    .stage-media img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
     }
 
     .thumbs {
@@ -331,8 +347,11 @@
     <section class="hero card">
       <div class="gallery" aria-label="Product photos">
         <div class="stage">
-          <img id="stageImg" class="zoomable" data-zoom-title="All board options" src="AllBoards.jpg" alt="All board options shown together" loading="lazy" />
+          <div class="stage-media">
+            <img id="stageImg" class="zoomable" data-zoom-title="All board options" src="AllBoards.jpg" alt="All board options shown together" loading="lazy" />
+          </div>
           <p class="muted" id="stageCaption" style="margin:10px 2px 0;">Tap the image to zoom. Use thumbnails below to switch photos.</p>
+          <p class="muted" id="stageDesc" style="margin:6px 2px 0;">A quick look at the different styles available.</p>
         </div>
 
         <!-- Thumbnails: keep grouped by style. First is AllBoards. -->
@@ -344,89 +363,89 @@
 
           <ul class="thumbs" id="thumbs">
             <!-- All boards (first) -->
-            <li class="thumb" aria-current="true" data-src="AllBoards.jpg" data-title="All board options" data-alt="All board options shown together">
+            <li class="thumb" aria-current="true" data-src="AllBoards.jpg" data-title="All board options" data-alt="All board options shown together" data-desc="A quick look at the different styles available.">
               <button type="button" aria-label="Show All Boards photo">
                 <img src="AllBoards.jpg" alt="" loading="lazy" />
               </button>
             </li>
 
             <!-- Classic -->
-            <li class="thumb" data-src="Classic_FullBoard.jpg" data-title="Classic – full board" data-alt="Classic board shown fully assembled">
+            <li class="thumb" data-src="Classic_FullBoard.jpg" data-title="Classic – full board" data-alt="Classic board shown fully assembled" data-desc="Classic: a nod to the original Sorry! game colors and simple, clean style.">
               <button type="button" aria-label="Show Classic full board">
                 <img src="Classic_FullBoard.jpg" alt="" loading="lazy" />
               </button>
             </li>
-            <li class="thumb" data-src="Classic_AngleView1.jpg" data-title="Classic – angle view" data-alt="Classic board angled view">
+            <li class="thumb" data-src="Classic_AngleView1.jpg" data-title="Classic – angle view" data-alt="Classic board angled view" data-desc="Classic: a nod to the original Sorry! game colors and simple, clean style.">
               <button type="button" aria-label="Show Classic angle view">
                 <img src="Classic_AngleView1.jpg" alt="" loading="lazy" />
               </button>
             </li>
 
             <!-- Christmas -->
-            <li class="thumb" data-src="Christmas_FullBoard.jpg" data-title="Christmas – full board" data-alt="Christmas themed board shown fully">
+            <li class="thumb" data-src="Christmas_FullBoard.jpg" data-title="Christmas – full board" data-alt="Christmas themed board shown fully" data-desc="Christmas: a festive holiday theme — great as a gift or to bring out in December.">
               <button type="button" aria-label="Show Christmas full board">
                 <img src="Christmas_FullBoard.jpg" alt="" loading="lazy" />
               </button>
             </li>
-            <li class="thumb" data-src="Christmas_AngleView1.jpg" data-title="Christmas – angle view" data-alt="Christmas themed board angled view">
+            <li class="thumb" data-src="Christmas_AngleView1.jpg" data-title="Christmas – angle view" data-alt="Christmas themed board angled view" data-desc="Christmas: a festive holiday theme — great as a gift or to bring out in December.">
               <button type="button" aria-label="Show Christmas angle view">
                 <img src="Christmas_AngleView1.jpg" alt="" loading="lazy" />
               </button>
             </li>
-            <li class="thumb" data-src="Christmas_Back.jpg" data-title="Christmas – back" data-alt="Back side of Christmas themed board">
+            <li class="thumb" data-src="Christmas_Back.jpg" data-title="Christmas – back" data-alt="Back side of Christmas themed board" data-desc="Christmas: a festive holiday theme — great as a gift or to bring out in December.">
               <button type="button" aria-label="Show Christmas back">
                 <img src="Christmas_Back.jpg" alt="" loading="lazy" />
               </button>
             </li>
 
             <!-- CB (Apologies theme back) -->
-            <li class="thumb" data-src="CB_FullBoard.jpg" data-title="CB – full board" data-alt="Board shown fully assembled">
+            <li class="thumb" data-src="CB_FullBoard.jpg" data-title="CB – full board" data-alt="Board shown fully assembled" data-desc="CB: the signature Apologies board style with the ‘When Sorry isn’t enough’ back.">
               <button type="button" aria-label="Show CB full board">
                 <img src="CB_FullBoard.jpg" alt="" loading="lazy" />
               </button>
             </li>
-            <li class="thumb" data-src="CB_AngleView1.jpg" data-title="CB – angle view" data-alt="Board angled view">
+            <li class="thumb" data-src="CB_AngleView1.jpg" data-title="CB – angle view" data-alt="Board angled view" data-desc="CB: the signature Apologies board style with the ‘When Sorry isn’t enough’ back.">
               <button type="button" aria-label="Show CB angle view">
                 <img src="CB_AngleView1.jpg" alt="" loading="lazy" />
               </button>
             </li>
-            <li class="thumb" data-src="CB_Back.jpg" data-title="CB – back" data-alt="Back side of board showing Apologies text">
+            <li class="thumb" data-src="CB_Back.jpg" data-title="CB – back" data-alt="Back side of board showing Apologies text" data-desc="CB: the signature Apologies board style with the ‘When Sorry isn’t enough’ back.">
               <button type="button" aria-label="Show CB back">
                 <img src="CB_Back.jpg" alt="" loading="lazy" />
               </button>
             </li>
 
             <!-- Galaxy -->
-            <li class="thumb" data-src="Galaxy_FullBoard.jpg" data-title="Galaxy – full board" data-alt="Galaxy themed board shown fully">
+            <li class="thumb" data-src="Galaxy_FullBoard.jpg" data-title="Galaxy – full board" data-alt="Galaxy themed board shown fully" data-desc="Galaxy: a sparkly space theme with star accents and bold color pops.">
               <button type="button" aria-label="Show Galaxy full board">
                 <img src="Galaxy_FullBoard.jpg" alt="" loading="lazy" />
               </button>
             </li>
-            <li class="thumb" data-src="Galaxy_AngleView1.jpg" data-title="Galaxy – angle view" data-alt="Galaxy themed board angled view">
+            <li class="thumb" data-src="Galaxy_AngleView1.jpg" data-title="Galaxy – angle view" data-alt="Galaxy themed board angled view" data-desc="Galaxy: a sparkly space theme with star accents and bold color pops.">
               <button type="button" aria-label="Show Galaxy angle view">
                 <img src="Galaxy_AngleView1.jpg" alt="" loading="lazy" />
               </button>
             </li>
-            <li class="thumb" data-src="Galaxy_Back.jpg" data-title="Galaxy – back" data-alt="Back side of galaxy themed board">
+            <li class="thumb" data-src="Galaxy_Back.jpg" data-title="Galaxy – back" data-alt="Back side of galaxy themed board" data-desc="Galaxy: a sparkly space theme with star accents and bold color pops.">
               <button type="button" aria-label="Show Galaxy back">
                 <img src="Galaxy_Back.jpg" alt="" loading="lazy" />
               </button>
             </li>
 
             <!-- Neon -->
-            <li class="thumb" data-src="Neon_FullBoard.jpg" data-title="Neon – full board" data-alt="Neon board shown fully">
+            <li class="thumb" data-src="Neon_FullBoard.jpg" data-title="Neon – full board" data-alt="Neon board shown fully" data-desc="Neon: high-contrast dark base with bright neon accents for maximum pop.">
               <button type="button" aria-label="Show Neon full board">
                 <img src="Neon_FullBoard.jpg" alt="" loading="lazy" />
               </button>
             </li>
-            <li class="thumb" data-src="Neon_AngleView1.jpg" data-title="Neon – angle view" data-alt="Neon board angled view">
+            <li class="thumb" data-src="Neon_AngleView1.jpg" data-title="Neon – angle view" data-alt="Neon board angled view" data-desc="Neon: high-contrast dark base with bright neon accents for maximum pop.">
               <button type="button" aria-label="Show Neon angle view">
                 <img src="Neon_AngleView1.jpg" alt="" loading="lazy" />
               </button>
             </li>
 
             <!-- Pastel -->
-            <li class="thumb" data-src="Pastel_FullBoard_Clipped.jpg" data-title="Pastel – full board" data-alt="Pastel board shown fully">
+            <li class="thumb" data-src="Pastel_FullBoard_Clipped.jpg" data-title="Pastel – full board" data-alt="Pastel board shown fully" data-desc="Pastel: soft, light colors with a clean, friendly look.">
               <button type="button" aria-label="Show Pastel full board">
                 <img src="Pastel_FullBoard_Clipped.jpg" alt="" loading="lazy" />
               </button>
@@ -490,6 +509,7 @@
     // Thumbnail → stage image
     const stageImg = document.getElementById('stageImg');
     const stageCaption = document.getElementById('stageCaption');
+    const stageDesc = document.getElementById('stageDesc');
     const thumbs = Array.from(document.querySelectorAll('.thumb'));
 
     function setCurrentThumb(el) {
@@ -503,14 +523,16 @@
         const src = t.getAttribute('data-src');
         const title = t.getAttribute('data-title') || 'Photo';
         const alt = t.getAttribute('data-alt') || 'Board photo';
+        const desc = t.getAttribute('data-desc') || '';
 
         stageImg.src = src;
         stageImg.alt = alt;
         stageImg.setAttribute('data-zoom-title', title);
         stageCaption.textContent = title + ' — Tap the image to zoom.';
+        stageDesc.textContent = desc;
 
         setCurrentThumb(t);
-        stageImg.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        // No auto-scroll here — prevents the page from bouncing/jumping on mobile.
       });
     });
 
