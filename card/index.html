@@ -153,37 +153,52 @@
         <p class="muted">If you want me to follow up, drop your info here. I’ll only use it to respond.</p>
 
         <!-- Option A: Google Form (recommended for “no backend”) -->
-        <!-- Replace the action URL with your Google Form POST URL (I can help map fields). -->
-        <form action="" method="POST" id="exchangeForm">
+        <!-- Exchange contact info (posts directly into Google Forms) -->
+        <form
+          id="exchangeForm"
+          action="https://docs.google.com/forms/d/e/1FAIpQLSdfaTptfRS4BUNnHFl3mzeE2IBey2WUAdYdSPW3KNt5Vfe3mw/formResponse"
+          method="POST"
+          target="hidden_iframe"
+          autocomplete="on"
+        >
           <div class="row">
             <div>
               <label for="name">Name</label>
-              <input id="name" name="name" autocomplete="name" required />
+              <input id="name" name="entry.511745724" autocomplete="name" required />
             </div>
             <div>
               <label for="company">Company (optional)</label>
-              <input id="company" name="company" autocomplete="organization" />
+              <input id="company" name="entry.642431266" autocomplete="organization" />
             </div>
           </div>
-
+        
           <div class="row">
             <div>
               <label for="email">Email</label>
-              <input id="email" name="email" type="email" autocomplete="email" required />
+              <input id="email" name="entry.116142245" type="email" autocomplete="email" required />
             </div>
             <div>
               <label for="phone">Phone (optional)</label>
-              <input id="phone" name="phone" autocomplete="tel" />
+              <input id="phone" name="entry.1105755181" autocomplete="tel" />
             </div>
           </div>
-
+        
           <div>
-            <label for="note">What should I know? (optional)</label>
-            <textarea id="note" name="note" placeholder="E.g., “Interested in a custom board”"></textarea>
+            <label for="note">Note (optional)</label>
+            <textarea id="note" name="entry.348871716" placeholder="E.g., Interested in a board / 3D print / etc."></textarea>
           </div>
-
+        
           <button class="btn primary" type="submit">↪ Share my info</button>
         </form>
+        
+        <!-- Hidden iframe so Google Forms doesn't redirect the page -->
+        <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
+        
+        <!-- Success message -->
+        <p class="small" id="formMsg" style="display:none; margin-top:10px;">
+          Thanks — got it. I’ll follow up soon.
+        </p>
+
 
         <p class="small">
           Tip: If you use a QR code on your business card, point it to <strong>jsbg.ca/card</strong>.
@@ -206,5 +221,20 @@
       }
     });
   </script>
+
+  <script>
+   // This prevents “bounce”, shows a success message, and clears the form after submit.
+  const form = document.getElementById('exchangeForm');
+  const msg = document.getElementById('formMsg');
+
+  form.addEventListener('submit', () => {
+    // Give Google Forms a moment to accept the POST
+    setTimeout(() => {
+      msg.style.display = 'block';
+      form.reset();
+    }, 700);
+  });
+</script>
+
 </body>
 </html>
