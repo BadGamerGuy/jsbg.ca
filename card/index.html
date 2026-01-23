@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>JSBG — Contact</title>
+  <meta name="description" content="Save my contact info and share yours." />
+  <style>
+    :root{
+      --bg:#0b0d12;
+      --card:#121622;
+      --card2:#0f1320;
+      --text:#e9eefc;
+      --muted:#b4bdd6;
+      --border:rgba(255,255,255,.12);
+      --accent:#6ee7ff;
+      --accent2:#8b5cf6;
+      --shadow: 0 16px 50px rgba(0,0,0,.45);
+      --radius:18px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      background: radial-gradient(1200px 700px at 20% -10%, rgba(110,231,255,.20), transparent 55%),
+                  radial-gradient(900px 650px at 110% 20%, rgba(139,92,246,.22), transparent 55%),
+                  var(--bg);
+      color:var(--text);
+      padding:22px 14px 50px;
+    }
+    .wrap{max-width:720px;margin:0 auto}
+    .hero{
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow: var(--shadow);
+      padding:18px;
+    }
+    .top{
+      display:flex; gap:14px; align-items:center;
+    }
+    .avatar{
+      width:64px;height:64px;border-radius:16px;
+      border:1px solid var(--border);
+      background: linear-gradient(135deg, rgba(110,231,255,.25), rgba(139,92,246,.25));
+      display:grid;place-items:center;
+      font-weight:700;
+      letter-spacing:.5px;
+    }
+    h1{font-size:22px; margin:0 0 4px}
+    .sub{margin:0;color:var(--muted);line-height:1.35}
+    .grid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:10px;
+      margin-top:14px;
+    }
+    @media (max-width:520px){ .grid{grid-template-columns:1fr} }
+    .btn{
+      display:flex; align-items:center; justify-content:center;
+      gap:10px;
+      padding:13px 14px;
+      border-radius:14px;
+      border:1px solid var(--border);
+      background: rgba(255,255,255,.04);
+      color:var(--text);
+      text-decoration:none;
+      font-weight:600;
+      min-height:48px;
+    }
+    .btn.primary{
+      background: linear-gradient(135deg, rgba(110,231,255,.18), rgba(139,92,246,.18));
+      border-color: rgba(110,231,255,.28);
+    }
+    .btn:active{transform: translateY(1px)}
+    .section{
+      margin-top:14px;
+      background: rgba(255,255,255,.03);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      padding:16px;
+    }
+    .section h2{margin:0 0 8px; font-size:16px}
+    .muted{color:var(--muted);margin:0;line-height:1.5}
+    form{
+      margin-top:12px;
+      display:grid;
+      gap:10px;
+    }
+    label{font-size:12px;color:var(--muted)}
+    input, textarea{
+      width:100%;
+      padding:12px 12px;
+      border-radius:12px;
+      border:1px solid var(--border);
+      background: rgba(0,0,0,.25);
+      color:var(--text);
+      outline:none;
+    }
+    textarea{min-height:92px; resize:vertical}
+    .row{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:10px;
+    }
+    @media (max-width:520px){ .row{grid-template-columns:1fr} }
+    .small{
+      margin-top:10px;
+      font-size:12px;
+      color:var(--muted);
+    }
+    .pill{
+      display:inline-block;
+      padding:4px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background: rgba(255,255,255,.03);
+      font-size:12px;
+      color:var(--muted);
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="hero">
+      <div class="top">
+        <div class="avatar" aria-hidden="true">JS</div>
+        <div>
+          <h1>Shaun Adams</h1>
+          <p class="sub">JSBG • 3D printing + board games</p>
+          <span class="pill">Save my contact • Share yours</span>
+        </div>
+      </div>
+
+      <div class="grid" role="navigation" aria-label="Contact actions">
+        <!-- Save Contact -->
+        <a class="btn primary" href="./shaun-adams-jsbg.vcf" download>
+          💾 Save Contact
+        </a>
+
+        <!-- Call / Text / Email -->
+        <a class="btn" href="tel:+1XXXXXXXXXX">📞 Call</a>
+        <a class="btn" href="sms:+1XXXXXXXXXX">💬 Text</a>
+        <a class="btn" href="mailto:shaun@jsbg.ca?subject=Hey%20Shaun">✉️ Email</a>
+
+        <!-- Website / Optional socials -->
+        <a class="btn" href="https://jsbg.ca" target="_blank" rel="noopener">🌐 Website</a>
+        <a class="btn" href="https://jsbg.ca/apologies" target="_blank" rel="noopener">🎲 Apologies</a>
+      </div>
+
+      <div class="section">
+        <h2>Exchange contact info</h2>
+        <p class="muted">If you want me to follow up, drop your info here. I’ll only use it to respond.</p>
+
+        <!-- Option A: Google Form (recommended for “no backend”) -->
+        <!-- Replace the action URL with your Google Form POST URL (I can help map fields). -->
+        <form action="" method="POST" id="exchangeForm">
+          <div class="row">
+            <div>
+              <label for="name">Name</label>
+              <input id="name" name="name" autocomplete="name" required />
+            </div>
+            <div>
+              <label for="company">Company (optional)</label>
+              <input id="company" name="company" autocomplete="organization" />
+            </div>
+          </div>
+
+          <div class="row">
+            <div>
+              <label for="email">Email</label>
+              <input id="email" name="email" type="email" autocomplete="email" required />
+            </div>
+            <div>
+              <label for="phone">Phone (optional)</label>
+              <input id="phone" name="phone" autocomplete="tel" />
+            </div>
+          </div>
+
+          <div>
+            <label for="note">What should I know? (optional)</label>
+            <textarea id="note" name="note" placeholder="E.g., “Interested in a custom board”"></textarea>
+          </div>
+
+          <button class="btn primary" type="submit">↪ Share my info</button>
+        </form>
+
+        <p class="small">
+          Tip: If you use a QR code on your business card, point it to <strong>jsbg.ca/card</strong>.
+        </p>
+      </div>
+    </div>
+
+    <p class="small" style="text-align:center; margin-top:14px;">
+      © JSBG
+    </p>
+  </div>
+
+  <script>
+    // If you DON'T have the form endpoint set yet, prevent a dead submit.
+    const form = document.getElementById('exchangeForm');
+    form.addEventListener('submit', (e) => {
+      if (!form.getAttribute('action')) {
+        e.preventDefault();
+        alert("Form isn’t connected yet. Tell me whether you want Google Forms or Formspree and I’ll wire it up.");
+      }
+    });
+  </script>
+</body>
+</html>
