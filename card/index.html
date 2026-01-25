@@ -190,14 +190,16 @@
         
           <button class="btn primary" type="submit">↪ Share my info</button>
         </form>
+
         
-        <!-- Hidden iframe so Google Forms doesn't redirect the page -->
-        <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
         
-        <!-- Success message -->
-        <p class="small" id="formMsg" style="display:none; margin-top:10px;">
-          Thanks — got it. I’ll follow up soon.
-        </p>
+          <!-- Hidden iframe so the page doesn’t redirect -->
+          <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
+          
+          <!-- Status message shown to the user -->
+          <p class="small" id="formMsg" style="display:none; margin-top:10px;">
+          </p>
+
 
 
         <p class="small">
@@ -236,5 +238,45 @@
   });
 </script>
 
+<script>
+  const form = document.getElementById('exchangeForm');
+  const iframe = document.getElementById('hidden_iframe');
+  const msg = document.getElementById('formMsg');
+  const btn = form.querySelector('button[type="submit"]');
+
+  let submitted = false;
+
+  // When user clicks submit
+  form.addEventListener('submit', () => {
+    submitted = true;
+
+    msg.style.display = 'block';
+    msg.textContent = 'Sending…';
+
+    if (btn) {
+      btn.disabled = true;
+      btn.dataset.originalText = btn.textContent;
+      btn.textContent = 'Sending…';
+    }
+  });
+
+  // When Google Form finishes receiving the POST
+  iframe.addEventListener('load', () => {
+    // iframe loads once on page load — ignore that
+    if (!submitted) return;
+
+    msg.textContent = 'Thanks — got it. I’ll follow up soon.';
+    form.reset();
+
+    if (btn) {
+      btn.disabled = false;
+      btn.textContent = btn.dataset.originalText || '↪ Share my info';
+    }
+
+    submitted = false;
+  });
+</script>
+
+  
 </body>
 </html>
