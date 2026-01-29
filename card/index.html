@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>JSBG — Contact</title>
   <meta name="description" content="Save my contact info and share yours." />
+
   <style>
     :root{
       --bg:#0b0d12;
@@ -21,10 +22,11 @@
     *{box-sizing:border-box}
     body{
       margin:0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
-      background: radial-gradient(1200px 700px at 20% -10%, rgba(110,231,255,.20), transparent 55%),
-                  radial-gradient(900px 650px at 110% 20%, rgba(139,92,246,.22), transparent 55%),
-                  var(--bg);
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      background:
+        radial-gradient(1200px 700px at 20% -10%, rgba(110,231,255,.20), transparent 55%),
+        radial-gradient(900px 650px at 110% 20%, rgba(139,92,246,.22), transparent 55%),
+        var(--bg);
       color:var(--text);
       padding:22px 14px 50px;
     }
@@ -36,15 +38,31 @@
       box-shadow: var(--shadow);
       padding:18px;
     }
-    .top{ display:flex; gap:14px; align-items:center; }
+
+    .top{
+      display:flex;
+      gap:14px;
+      align-items:center;
+    }
+
+    .avatar-link{
+      text-decoration:none;
+    }
+
     .avatar{
-      width:64px;height:64px;border-radius:16px;
+      width:64px;
+      height:64px;
+      border-radius:16px;
       border:1px solid var(--border);
       background: linear-gradient(135deg, rgba(110,231,255,.25), rgba(139,92,246,.25));
-      display:grid;place-items:center;
-      font-weight:700;
-      letter-spacing:.5px;
+      display:grid;
+      place-items:center;
+      font-weight:800;
+      letter-spacing:.6px;
+      color:var(--text);
+      cursor:pointer;
     }
+
     h1{font-size:22px; margin:0 0 4px}
     .sub{margin:0;color:var(--muted);line-height:1.35}
 
@@ -54,10 +72,14 @@
       gap:10px;
       margin-top:14px;
     }
-    @media (max-width:520px){ .grid{grid-template-columns:1fr} }
+    @media (max-width:520px){
+      .grid{grid-template-columns:1fr}
+    }
 
     .btn{
-      display:flex; align-items:center; justify-content:center;
+      display:flex;
+      align-items:center;
+      justify-content:center;
       gap:10px;
       padding:13px 14px;
       border-radius:14px;
@@ -67,12 +89,14 @@
       text-decoration:none;
       font-weight:600;
       min-height:48px;
-      cursor:pointer; /* makes buttons feel clickable */
+      cursor:pointer;
     }
+
     .btn.primary{
       background: linear-gradient(135deg, rgba(110,231,255,.18), rgba(139,92,246,.18));
       border-color: rgba(110,231,255,.28);
     }
+
     .btn:active{transform: translateY(1px)}
     .btn:disabled{
       opacity:.65;
@@ -95,10 +119,11 @@
       display:grid;
       gap:10px;
     }
+
     label{font-size:12px;color:var(--muted)}
     input, textarea{
       width:100%;
-      padding:12px 12px;
+      padding:12px;
       border-radius:12px;
       border:1px solid var(--border);
       background: rgba(0,0,0,.25);
@@ -112,13 +137,16 @@
       grid-template-columns: 1fr 1fr;
       gap:10px;
     }
-    @media (max-width:520px){ .row{grid-template-columns:1fr} }
+    @media (max-width:520px){
+      .row{grid-template-columns:1fr}
+    }
 
     .small{
       margin-top:10px;
       font-size:12px;
       color:var(--muted);
     }
+
     .pill{
       display:inline-block;
       padding:4px 10px;
@@ -129,7 +157,6 @@
       color:var(--muted);
     }
 
-    /* Status message styling */
     #formMsg{
       padding:10px 12px;
       border-radius:12px;
@@ -138,11 +165,14 @@
     }
   </style>
 </head>
+
 <body>
   <div class="wrap">
     <div class="hero">
       <div class="top">
-        <div class="avatar" aria-hidden="true">JS</div>
+        <a href="https://jsbg.ca" class="avatar-link" aria-label="Go to JSBG home">
+          <div class="avatar">JSBG</div>
+        </a>
         <div>
           <h1>Shaun Adams</h1>
           <p class="sub">JSBG • 3D printing + board games</p>
@@ -151,19 +181,13 @@
       </div>
 
       <div class="grid" role="navigation" aria-label="Contact actions">
-        <!-- Save Contact -->
         <a class="btn primary" href="./shaun-adams-jsbg.vcf" download>
           💾 Save Contact
         </a>
 
-        <!-- Call / Text / Email -->
         <a class="btn" href="tel:+17809199407">📞 Call</a>
         <a class="btn" href="sms:+17809199407">💬 Text</a>
         <a class="btn" href="mailto:shaun@jsbg.ca?subject=Hey%20Shaun">✉️ Email</a>
-
-        <!-- Website / Optional links -->
-        <a class="btn" href="https://jsbg.ca" target="_blank" rel="noopener">🌐 Website</a>
-        <a class="btn" href="https://jsbg.ca/apologies" target="_blank" rel="noopener">🎲 Apologies</a>
       </div>
 
       <div class="section">
@@ -201,27 +225,20 @@
 
           <div>
             <label for="note">Note (optional)</label>
-            <textarea id="note" name="entry.348871716" placeholder="E.g., Interested in a board / 3D print / etc."></textarea>
+            <textarea id="note" name="entry.348871716" placeholder="E.g., Looking for some help setting up some data analysis."></textarea>
           </div>
 
           <button class="btn primary" type="submit" id="shareBtn">↪ Share my info</button>
         </form>
 
-        <!-- Hidden iframe so the page doesn’t redirect -->
         <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
-
-        <!-- Status message shown to the user -->
         <p class="small" id="formMsg" style="display:none; margin-top:10px;"></p>
 
-        <p class="small">
-          Tip: If you use a QR code on your business card, point it to <strong>jsbg.ca/card</strong>.
-        </p>
+
       </div>
     </div>
 
-    <p class="small" style="text-align:center; margin-top:14px;">
-      © JSBG
-    </p>
+    <p class="small" style="text-align:center; margin-top:14px;">© JSBG</p>
   </div>
 
   <script>
@@ -234,32 +251,24 @@
 
     form.addEventListener('submit', () => {
       submitted = true;
-
       msg.style.display = 'block';
       msg.textContent = 'Sending…';
 
-      if (btn) {
-        btn.disabled = true;
-        btn.dataset.originalText = btn.textContent;
-        btn.textContent = 'Sending…';
-      }
+      btn.disabled = true;
+      btn.dataset.originalText = btn.textContent;
+      btn.textContent = 'Sending…';
     });
 
     iframe.addEventListener('load', () => {
-      // iframe can load on page load; only treat as success after a submit
       if (!submitted) return;
 
       msg.textContent = 'Thanks — got it. I’ll follow up soon.';
       form.reset();
 
-      if (btn) {
-        btn.disabled = false;
-        btn.textContent = btn.dataset.originalText || '↪ Share my info';
-      }
-
+      btn.disabled = false;
+      btn.textContent = btn.dataset.originalText || '↪ Share my info';
       submitted = false;
 
-      // Optional: auto-hide the message after a few seconds
       setTimeout(() => {
         msg.style.display = 'none';
       }, 6000);
