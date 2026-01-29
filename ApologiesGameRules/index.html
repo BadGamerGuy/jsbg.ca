@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Apologies – Game Rules</title>
-  <meta name="description" content="Apologies board game rules – mobile-first, readable, and easy to reference during play." />
+  <meta name="description" content="Apologies board game rules." />
   <style>
     /* ===== Mobile-first rules page =====
        - Single column on mobile, TOC becomes sticky sidebar on desktop
@@ -330,11 +330,17 @@
 
     /* ===== Print tweaks (nice bonus) ===== */
     @media print {
-      header.site, nav.toc { display:none; }
-      body { background:#fff; color:#111; }
-      .card { box-shadow:none; }
-      a { color:#111; text-decoration:none; }
+      header.site, nav.toc, .header-actions { display: none !important; }
+      body { background:#fff !important; color:#111 !important; }
+      .wrap { width: 100% !important; margin: 0 !important; }
+      .layout { display: block !important; padding: 0 !important; }
+      article.rules { padding: 0 !important; border: 0 !important; box-shadow: none !important; }
+      .card { box-shadow:none !important; border: 0 !important; }
+      a { color:#111 !important; text-decoration:none !important; }
+      figure { break-inside: avoid; page-break-inside: avoid; }
+      .rules-list li { break-inside: avoid; page-break-inside: avoid; }
     }
+
   .rotate-ccw { transform: rotate(-90deg); transform-origin: center; }
 /* Tap-to-zoom images */
 img.zoomable { cursor: zoom-in; }
@@ -437,7 +443,7 @@ img.zoomable { cursor: zoom-in; }
       </div>
       <div class="header-actions">
         <a class="btn" href="#overview" aria-label="Jump to overview">Top</a>
-        <a class="btn" href="mailto:printing@jsbg.ca" aria-label="Email">Email</a>
+        <a class="btn" href="#" onclick="window.print(); return false;">Print</a>
       </div>
     </div>
   </header>
