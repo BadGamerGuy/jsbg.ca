@@ -329,17 +329,67 @@
     }
 
     /* ===== Print tweaks (nice bonus) ===== */
-    @media print {
-      header.site, nav.toc, .header-actions { display: none !important; }
-      body { background:#fff !important; color:#111 !important; }
-      .wrap { width: 100% !important; margin: 0 !important; }
-      .layout { display: block !important; padding: 0 !important; }
-      article.rules { padding: 0 !important; border: 0 !important; box-shadow: none !important; }
-      .card { box-shadow:none !important; border: 0 !important; }
-      a { color:#111 !important; text-decoration:none !important; }
-      figure { break-inside: avoid; page-break-inside: avoid; }
-      .rules-list li { break-inside: avoid; page-break-inside: avoid; }
-    }
+@media print {
+  /* --- Page setup --- */
+  @page { margin: 0.5in; } /* adjust: 0.4in if you want tighter */
+  html, body {
+    background: #fff !important;
+    color: #111 !important;
+    font-size: 10.5pt !important; /* smaller */
+    line-height: 1.25 !important; /* tighter */
+  }
+
+  /* --- Hide non-essential UI --- */
+  header, nav, .toc, .header-actions, .btn, .pill, .badge, footer {
+    display: none !important;
+  }
+
+  /* --- Remove “card” styling / shadows / padding --- */
+  .wrap, main, section, article, .card, .panel {
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    box-shadow: none !important;
+    background: transparent !important;
+  }
+
+  /* --- Hide images entirely --- */
+  img, figure, picture, video, .placeholder {
+    display: none !important;
+  }
+
+  /* --- Headings compact --- */
+  h1 { font-size: 16pt !important; margin: 0 0 6pt !important; }
+  h2 { font-size: 12pt !important; margin: 10pt 0 4pt !important; }
+  h3 { font-size: 11pt !important; margin: 8pt 0 3pt !important; }
+  p  { margin: 0 0 6pt !important; }
+
+  /* --- Lists compact --- */
+  ul, ol { margin: 0 0 6pt 14pt !important; padding: 0 !important; }
+  li { margin: 0 0 2pt !important; }
+
+  /* --- Avoid awkward breaks --- */
+  h2, h3 { break-after: avoid; page-break-after: avoid; }
+  li, p { break-inside: avoid; page-break-inside: avoid; }
+
+  /* --- Links: print clean --- */
+  a, a:visited { color: #111 !important; text-decoration: none !important; }
+
+  /* --- Optional: two-column layout for the main rules content --- */
+  /* If your main content is inside <article class="rules"> ... */
+  article.rules {
+    column-count: 2;
+    column-gap: 0.35in;
+  }
+
+  /* Prevent headings splitting across columns */
+  article.rules h2, article.rules h3 { column-span: all; }
+
+  /* If two columns is too aggressive, just comment out the block above. */
+}
+
 
   .rotate-ccw { transform: rotate(-90deg); transform-origin: center; }
 /* Tap-to-zoom images */
