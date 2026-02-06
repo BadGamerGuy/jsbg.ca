@@ -51,6 +51,7 @@ a:hover{ color: var(--accent-hover); }
 .header-inner{
   max-width:var(--max);margin:0 auto;padding:14px var(--pad);
   display:flex;align-items:center;justify-content:space-between;gap:16px;
+  padding: 2rem 2rem;
 }
 
 .brand{display:flex;align-items:center;gap:12px;text-decoration:none}
@@ -70,7 +71,7 @@ a:hover{ color: var(--accent-hover); }
 }
 
 .logo-wrap img{
-  height: 72px;        /* ← primary control */
+  height: 90px;        /* ← primary control */
   width: auto;
   max-width: none;
 }
