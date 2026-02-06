@@ -64,6 +64,18 @@ a:hover{ color: var(--accent-hover); }
   white-space:nowrap;border:0;
 }
 
+.logo-wrap{
+  display: flex;
+  align-items: center;
+}
+
+.logo-wrap img{
+  height: 72px;        /* ← primary control */
+  width: auto;
+  max-width: none;
+}
+
+
 .nav{display:flex;gap:18px;flex-wrap:wrap}
 .nav a{text-decoration:none;color:var(--muted);font-weight:600}
 .nav a:hover{color:var(--text)}
