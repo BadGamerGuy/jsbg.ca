@@ -3,249 +3,222 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>JSBG</title>
-  <meta name="description" content="Shaun Adams — Analyst & Process Improvement specialist. Data, operations, and custom 3D printing services in Peace River, AB." />
+
+  <title>JSBG Consulting | Process improvement, automation, and analytics (Peace River, AB)</title>
+  <meta name="description" content="JSBG Consulting (Shaun Adams) helps organizations simplify operations through process improvement, workflow automation, and data collection/analysis—based in Peace River, Alberta and remote-friendly." />
+
+  <link rel="icon" href="assets/img/logo.png" />
+  <link rel="stylesheet" href="assets/site.css" />
 
   <!-- Open Graph -->
-  <meta property="og:title" content="Shaun Adams — JSBG" />
-  <meta property="og:description" content="Analyst & Process Improvement specialist. Data, operations, and custom 3D printing services." />
+  <meta property="og:title" content="JSBG Consulting" />
+  <meta property="og:description" content="Process improvement, automation, and analytics. Based in Peace River, AB (remote-friendly)." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://jsbg.ca/" />
+  <meta property="og:image" content="https://jsbg.ca/assets/img/logo-slogan.png" />
 
-  <style>
-    :root {
-      --bg: #0b1020;
-      --bg-elev: #121735;
-      --text: #e9edf7;
-      --muted: #a9b1c7;
-      --accent: #73b8ff;
-      --accent-2: #9fe870;
-      --card: #10162b;
-      --border: rgba(255,255,255,0.08);
-      --shadow: 0 10px 30px rgba(0,0,0,0.35);
-    }
-    @media (prefers-color-scheme: light) {
-      :root {
-        --bg: #f6f8fb;
-        --bg-elev: #ffffff;
-        --text: #0f172a;
-        --muted: #475569;
-        --accent: #0ea5e9;
-        --accent-2: #16a34a;
-        --card: #ffffff;
-        --border: rgba(15,23,42,0.08);
-        --shadow: 0 8px 24px rgba(2,6,23,0.08);
-      }
-    }
+  <!-- Twitter / X -->
+  <meta name="twitter:card" content="summary_large_image" />
 
-    html, body { height: 100%; }
-    body {
-      margin: 0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
-      color: var(--text);
-      background: radial-gradient(1200px 600px at 85% -10%, rgba(115,184,255,0.25), transparent 55%),
-                  radial-gradient(900px 500px at -10% 0%, rgba(159,232,112,0.20), transparent 60%),
-                  var(--bg);
-    }
-
-    .container { max-width: 1080px; margin: 0 auto; padding: 24px; }
-    header {
-      display: flex; align-items: center; justify-content: space-between;
-      gap: 16px; padding: 16px 0 8px; position: sticky; top: 0; backdrop-filter: blur(8px);
-      background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0));
-    }
-    .brand { display:flex; align-items:center; gap: 12px; text-decoration:none; color: var(--text); }
-    .logo { width: 36px; height: 36px; border-radius: 12px; background: linear-gradient(135deg, var(--accent), var(--accent-2)); box-shadow: var(--shadow); display:grid; place-items:center; font-weight:800; color:#0b1020; }
-    nav a { color: var(--muted); text-decoration: none; font-weight: 600; margin-left: 18px; }
-    nav a:hover { color: var(--text); }
-
-    .hero { padding: 72px 0 48px; display:grid; grid-template-columns: 1.25fr 0.75fr; gap: 28px; align-items: center; }
-    .hero h1 { font-size: clamp(32px, 5vw, 48px); line-height: 1.1; margin: 0 0 12px; }
-    .hero p.lede { font-size: clamp(16px, 2.2vw, 19px); color: var(--muted); margin: 0 0 24px; }
-
-    .card { background: var(--card); border: 1px solid var(--border); border-radius: 18px; padding: 22px; box-shadow: var(--shadow); }
-    .chip { display:inline-block; border:1px solid var(--border); background: color-mix(in oklab, var(--card), black 8%);
-            padding: 6px 10px; border-radius: 999px; margin: 0 8px 8px 0; font-size: 13px; color: var(--muted); }
-
-    .cta { display:flex; gap: 12px; flex-wrap: wrap; }
-    .btn { appearance:none; border:none; padding: 12px 16px; border-radius: 12px; font-weight: 700; cursor: pointer; text-decoration: none; display:inline-flex; align-items:center; gap:10px; }
-    .btn.primary { background: linear-gradient(135deg, var(--accent), #3da6ff); color:#071326; }
-    .btn.ghost { background: transparent; color: var(--text); border:1px solid var(--border); }
-
-    .grid { display:grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
-    .section { padding: 30px 0; }
-    .section h2 { margin: 0 0 12px; font-size: 22px; }
-    .muted { color: var(--muted); }
-
-    .list { list-style: none; padding: 0; margin: 12px 0 0; }
-    .list li { display:flex; gap: 10px; padding: 10px 0; border-bottom: 1px dashed var(--border); }
-    .list li:last-child { border-bottom: none; }
-
-    .footer { padding: 30px 0 60px; color: var(--muted); text-align:center; font-size: 14px; }
-    .link { color: var(--accent); text-decoration: none; }
-    .link:hover { text-decoration: underline; }
-
-    @media (max-width: 900px) {
-      .hero { grid-template-columns: 1fr; }
-      .grid { grid-template-columns: 1fr; }
-      header { position: static; background: transparent; }
-    }
-  </style>
+  <link rel="canonical" href="https://jsbg.ca/" />
 </head>
 <body>
-  <div class="container">
-    <header>
-      <a class="brand" href="#top" aria-label="JSBG home">
-        <div class="logo" aria-hidden="true">J</div>
-        <strong>JSBG</strong>
+  <header class="header">
+    <div class="header-inner">
+      <a class="brand" href="/" aria-label="JSBG Consulting home">
+        <img src="assets/img/logo.png" alt="JSBG logo" />
+        <span class="wordmark">JSBG Consulting</span>
       </a>
-      <nav aria-label="Primary">
-        <a href="#about">About</a>
+      <nav class="nav" aria-label="Primary">
         <a href="#services">Services</a>
+        <a href="#about">About</a>
         <a href="#contact">Contact</a>
       </nav>
-    </header>
+    </div>
+  </header>
 
-    <main id="top">
-      <section class="hero">
-        <div>
-          <h1>Shaun Adams</h1>
-          <p class="lede">Analyst & Process Improvement specialist with 20+ years across telecom, design, business analysis, and project management. I help teams untangle processes, illuminate data, and deliver calmly and consistently.</p>
-          <div class="cta">
-            <a class="btn primary" href="mailto:shaun@jsbg.ca?subject=Inquiry%20from%20jsbg.ca" aria-label="Email Shaun">Email Shaun</a>
-            <a class="btn ghost" href="#services">See Services</a>
+  <main class="container" id="top">
+    <section class="hero">
+      <div>
+        <span class="kicker"><span class="kicker-dot" aria-hidden="true"></span>Peace River, Alberta • remote-friendly</span>
+        <h1>Simplify operations. Make data usable. Automate the busywork.</h1>
+        <p>
+          I help teams improve processes, streamline workflows, and turn scattered information into clear reporting and dashboards.
+          This site is being refined—some sections contain placeholder text for review.
+        </p>
+        <div class="btnrow">
+          <a class="btn primary" href="#contact">Request a consult</a>
+          <a class="btn ghost" href="#services">Explore services</a>
+        </div>
+        <div class="badges" aria-label="Focus areas">
+          <span class="badge">Process & efficiency improvements</span>
+          <span class="badge">Automation & workflow cleanup</span>
+          <span class="badge">Data collection & analysis</span>
+          <span class="badge">Dashboard setup</span>
+          <span class="badge">Documentation & training</span>
+        </div>
+      </div>
+
+      <aside class="card" aria-label="Quick details">
+        <h2 style="margin:0 0 8px">Quick details</h2>
+        <p class="small" style="margin:0 0 14px">
+          Consulting for organizations that want practical improvements without drama: clear scope, simple artifacts, and steady progress.
+        </p>
+        <div class="badges">
+          <span class="badge">On-site (Peace River area)</span>
+          <span class="badge">Remote (Canada-wide)</span>
+          <span class="badge">Contract or project-based</span>
+        </div>
+        <hr style="border:none;border-top:1px solid var(--border);margin:16px 0" />
+        <p class="small" style="margin:0">
+          <strong>Typical outputs:</strong> process maps, standard operating procedures (SOPs), cleaned datasets, dashboards, and lightweight automation.
+        </p>
+      </aside>
+    </section>
+
+    <section id="services" class="section">
+      <h2>Services</h2>
+      <p class="lead">Small, focused blocks of work with clear deliverables. Replace any placeholder text as you refine the site.</p>
+
+      <div class="grid">
+        <article class="card">
+          <h3 class="service-title">Process & efficiency improvements</h3>
+          <p class="small">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Deliverables might include process maps, bottleneck analysis, and a prioritized improvement plan.</p>
+        </article>
+
+        <article class="card">
+          <h3 class="service-title">Automation & workflow cleanup</h3>
+          <p class="small">Lorem ipsum dolor sit amet. Examples: spreadsheet automation, form-to-sheet pipelines, and reducing duplicate/hand-entered work.</p>
+        </article>
+
+        <article class="card">
+          <h3 class="service-title">Data collection & analysis</h3>
+          <p class="small">Lorem ipsum dolor sit amet. Define what to measure, set up collection, clean the data, and produce reliable reporting.</p>
+        </article>
+
+        <article class="card">
+          <h3 class="service-title">Dashboards & reporting setup</h3>
+          <p class="small">Lorem ipsum dolor sit amet. KPI (Key Performance Indicator) definition, dashboard builds, and ongoing maintenance handoff.</p>
+        </article>
+
+        <article class="card">
+          <h3 class="service-title">Documentation & training</h3>
+          <p class="small">Lorem ipsum dolor sit amet. Standard operating procedures, checklists, handover packages, and simple training materials.</p>
+        </article>
+
+        <article class="card">
+          <h3 class="service-title">Implementation support</h3>
+          <p class="small">Lorem ipsum dolor sit amet. Light project coordination: scope, risks, dependencies, and stakeholder alignment.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="about" class="section">
+      <div class="grid">
+        <article class="card">
+          <h2>About</h2>
+          <p class="small">
+            I’m Shaun Adams. I’ve spent 20+ years across telecom and operations roles (construction, design, business analysis, and project management).
+            My style is practical: understand the work, reduce noise, document the new way, and make the data visible.
+          </p>
+          <p class="small">Based in Peace River, Alberta. Available for remote work and local on-site projects.</p>
+        </article>
+
+        <article class="card">
+          <h2>How I work</h2>
+          <p class="small"><strong>1) Quick discovery:</strong> 30–60 minutes to understand the problem, constraints, and urgency.</p>
+          <p class="small"><strong>2) Tight scope:</strong> define success, deliverables, and timelines (no vague “ongoing consulting” unless you want it).</p>
+          <p class="small"><strong>3) Deliver + handoff:</strong> you get usable artifacts and a simple next-steps plan.</p>
+        </article>
+
+        <article class="card">
+          <h2>Tools & strengths</h2>
+          <div class="badges">
+            <span class="badge">Google Workspace (Sheets)</span>
+            <span class="badge">Microsoft Office (Excel)</span>
+            <span class="badge">Dashboarding</span>
+            <span class="badge">Documentation systems</span>
+            <span class="badge">Light scripting</span>
           </div>
-          <div style="margin-top:16px">
-            <span class="chip">Data Analysis</span>
-            <span class="chip">Process Mapping</span>
-            <span class="chip">SOPs & Documentation</span>
-            <span class="chip">Data Visualization Dashboards</span>
-            <span class="chip">Lean Six Sigma (GB in progress)</span>
+          <p class="small" style="margin-top:12px">Lorem ipsum placeholder: add certifications, example outcomes, and testimonials here.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="contact" class="section">
+      <div class="grid">
+        <article class="card">
+          <h2>Contact</h2>
+          <p class="small">Use the form or email me directly. If you include a couple sentences about your goal, I’ll reply with next steps.</p>
+
+          <!--
+            Contact form note:
+            GitHub Pages is static, so this uses a form relay service.
+            Recommended: Formspree.
+            1) Create a form at Formspree and copy your form ID.
+            2) Replace YOUR_FORM_ID below.
+          -->
+          <form class="form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+            <div>
+              <label for="name">Name</label>
+              <input class="input" id="name" name="name" placeholder="Your name" required />
+            </div>
+            <div>
+              <label for="email">Email</label>
+              <input class="input" id="email" name="email" type="email" placeholder="you@company.com" required />
+            </div>
+            <div>
+              <label for="message">What do you need help with?</label>
+              <textarea class="input" id="message" name="message" rows="6" placeholder="A few details: what’s happening, what you want to improve, and your timeline." required></textarea>
+            </div>
+            <button class="btn primary" type="submit">Send message</button>
+          </form>
+
+          <div class="btnrow" style="margin-top:14px">
+            <a class="btn ghost" href="mailto:shaun@jsbg.ca?subject=Inquiry%20from%20jsbg.ca">shaun@jsbg.ca</a>
           </div>
-        </div>
-        <div class="card" role="complementary" aria-label="Quick facts">
-          <h2 style="margin-top:0">At a glance</h2>
-          <ul class="list">
-            <li><strong>Location</strong><span class="muted">Peace River, Alberta (remote-friendly)</span></li>
-            <li><strong>Focus</strong><span class="muted">Data & Operations, Process Improvement</span></li>
-            <li><strong>Availability</strong><span class="muted">Open to contract or full-time</span></li>
-            <li><strong>3D Printing</strong><span class="muted">Custom FDM prints, PLA/PETG/ABS</span></li>
-          </ul>
-        </div>
-      </section>
+        </article>
 
-      <section id="about" class="section">
-        <div class="grid">
-          <article class="card">
-            <h2>About</h2>
-            <p class="muted">I translate messy real‑world operations into clear systems. My background spans field construction to PMO, which helps me bridge hands‑on execution with pragmatic analysis. I’m fluent in spreadsheets, comfortable in SQL and scripting, and I build dashboards that people actually use.</p>
-          </article>
+        <article class="card">
+          <h2>Basic info</h2>
+          <p class="small"><strong>Location:</strong> Peace River, AB</p>
+          <p class="small"><strong>Hours:</strong> Lorem ipsum (replace with your preferred availability)</p>
+          <p class="small"><strong>Response time:</strong> Lorem ipsum (e.g., “within 1–2 business days”)</p>
+        </article>
 
-          <article class="card">
-            <h2>Highlights</h2>
-            <ul class="list">
-              <li>20+ years experience, mostly in telecom</li>
-              <li>Business analysis & project management across multi‑team initiatives</li>
-              <li>Strong with Google Workspace & MS Office (advanced spreadsheets)</li>
-              <li>Dashboarding with DOMO; data wrangling & QA</li>
-            </ul>
-          </article>
-
-          <article class="card">
-            <h2>Recent Focus</h2>
-            <ul class="list">
-              <li>Lean Six Sigma Green Belt (in progress)</li>
-              <li>Process documentation & SOP standardization</li>
-              <li>Lightweight automation and workflow cleanup</li>
-            </ul>
-          </article>
-        </div>
-      </section>
-
-      <section id="services" class="section">
-        <h2>Services</h2>
-        <div class="grid">
-          <article class="card">
-            <h3 style="margin-top:0">Consulting & Analysis</h3>
-            <p class="muted">Rapid assessments, KPI definition, spreadsheet models, and clear, version‑controlled SOPs. If you’re buried in tabs and tribal knowledge, I can help you make it simple and measurable.</p>
-            <ul class="list">
-              <li>Process mapping & gap analysis</li>
-              <li>Data cleanup & reporting (incl. DOMO)</li>
-              <li>Operational playbooks & training materials</li>
-            </ul>
-          </article>
-
-          <article class="card">
-            <h3 style="margin-top:0">Custom 3D Printing</h3>
-            <p class="muted">Small‑batch and one‑off FDM prints with quick turnaround. PLA, PETG, ABS; basic design tweaks available.</p>
-            <div class="cta" style="margin-top:8px">
-              <a class="btn primary" href="mailto:printing@jsbg.ca?subject=3D%20Printing%20Request&body=Please%20include%20a%20description%2FSTL%20and%20desired%20material%2Fcolor.">Request a print</a>
-              <a class="btn ghost" href="mailto:printing@jsbg.ca">printing@jsbg.ca</a>
-            </div>
-          </article>
-
-          <article class="card">
-            <h3 style="margin-top:0">Project Support</h3>
-            <p class="muted">Lightweight PM support and coordination to keep requirements, timelines, and stakeholders aligned.</p>
-            <ul class="list">
-              <li>Backlog grooming & prioritization</li>
-              <li>Risk & dependency tracking</li>
-              <li>Documentation and change control</li>
-            </ul>
-          </article>
-        </div>
-      </section>
-
-      <section id="contact" class="section">
-        <div class="grid">
-          <article class="card">
-            <h2>Contact</h2>
-            <p class="muted">The fastest way to reach me is email. I’m happy to share portfolio samples or references on request.</p>
-            <div class="cta" style="margin-top:8px">
-              <a class="btn primary" href="mailto:shaun@jsbg.ca?subject=Hello%20from%20jsbg.ca">shaun@jsbg.ca</a>
-              <a class="btn ghost" href="mailto:printing@jsbg.ca">printing@jsbg.ca</a>
-            </div>
-          </article>
-
-          <article class="card">
-            <h2>Links</h2>
-            <ul class="list">
-              <li><strong>LinkedIn</strong> <a class="link" href="https://www.linkedin.com/in/-shaun-adams/">/in/-shaun-adams/</a></li>
-              <li><strong>Location</strong> <span class="muted">Peace River, AB</span></li>
-            </ul>
-          </article>
-
-          <article class="card">
-            <h2>Notes</h2>
-            <p class="muted">This site is intentionally simple and fast. No trackers, no cookies and in large part, made by ChatGPT. I'll be uploading changes over time to make it more my own.</p>
-          </article>
-        </div>
-      </section>
-    </main>
+        <article class="card">
+          <h2>Professional links</h2>
+          <p class="small"><a href="https://www.linkedin.com/in/-shaun-adams/" style="text-decoration:none">LinkedIn</a></p>
+          <p class="small">Lorem ipsum placeholder for portfolio links, PDFs, or a short case study list.</p>
+        </article>
+      </div>
+    </section>
 
     <footer class="footer">
       <div>© <span id="y"></span> JSBG</div>
     </footer>
-  </div>
+  </main>
 
-  <script>
-    // Update year in footer
-    document.getElementById('y').textContent = new Date().getFullYear();
-  </script>
+  <script src="assets/site.js"></script>
 
-  <!-- Structured data for richer search results -->
+  <!-- Structured data -->
   <script type="application/ld+json">
   {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "Shaun Adams",
-    "email": "shaun@jsbg.ca",
-    "url": "https://jsbg.ca/",
-    "jobTitle": "Analyst & Process Improvement Specialist",
-    "worksFor": {"@type":"Organization","name":"JSBG"},
-    "sameAs": [
-      "https://www.linkedin.com/in/-shaun-adams/"
-    ]
+    "@context":"https://schema.org",
+    "@type":"ProfessionalService",
+    "name":"JSBG Consulting",
+    "url":"https://jsbg.ca/",
+    "image":"https://jsbg.ca/assets/img/logo-slogan.png",
+    "areaServed":"CA",
+    "address":{
+      "@type":"PostalAddress",
+      "addressLocality":"Peace River",
+      "addressRegion":"AB",
+      "addressCountry":"CA"
+    },
+    "email":"shaun@jsbg.ca",
+    "founder":{"@type":"Person","name":"Shaun Adams"},
+    "sameAs":["https://www.linkedin.com/in/-shaun-adams/"]
   }
   </script>
 </body>
