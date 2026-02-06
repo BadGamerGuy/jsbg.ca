@@ -32,6 +32,7 @@
 html,body{height:100%}
 body{
   margin:0;
+  line-height:1.55;
   font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,"Apple Color Emoji","Segoe UI Emoji";
   color:var(--text);
   background:var(--bg);
@@ -116,3 +117,14 @@ label{font-weight:700;font-size:13px;color:var(--muted)}
   .grid{grid-template-columns:1fr}
   .header{position:static}
 }
+
+
+/* Button variants (HTML uses .btn.primary and .btn.ghost) */
+.btn.primary, .btn-primary{
+  background: var(--accent);
+  color: #fff;
+  border-color: rgba(255,255,255,0.08);
+}
+.btn.primary:hover, .btn-primary:hover{ background: var(--accent-hover); }
+.btn.ghost{ background: transparent; color: var(--text); }
+.btn.ghost:hover{ border-color: color-mix(in oklab, var(--border), var(--accent) 30%); }
